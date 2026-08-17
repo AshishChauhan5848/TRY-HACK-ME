@@ -32,10 +32,12 @@ Mozilla Thunderbird is an email client/application, not an operating system.
 
 Three common authentication factors:
 
-Factor	Example
-Something you know	Password, PIN
-Something you are	Fingerprint, face
-Something you have	Phone/security token
+| Factor             | Example              |
+| ------------------ | -------------------- |
+| Something you know | Password, PIN        |
+| Something you are  | Fingerprint, face    |
+| Something you have | Phone/security token |
+
 
 Remember: passwords are something you know.
 
