@@ -1,1 +1,106 @@
 
+The key ideas to remember
+
+1. Bits
+
+    A bit is either 0 or 1.
+    1 bit → 2 possible states.
+    2 bits → 4 states.
+    3 bits → 8 states.
+    In general: n bits → 2ⁿ states.
+
+2. Colors
+RGB means Red, Green, Blue.
+
+With 1 bit per color:
+
+    000 → Black
+    001 → Blue
+    010 → Green
+    011 → Cyan
+    100 → Red
+    101 → Magenta
+    110 → Yellow
+    111 → White
+
+With 8 bits for each RGB channel:
+
+    Red: 256 levels
+    Green: 256 levels
+    Blue: 256 levels
+    Total: 256 × 256 × 256 = 16,777,216 colors.
+
+So a typical RGB color uses 24 bits = 3 bytes.
+
+3. Hexadecimal
+Hexadecimal is base 16 and uses:
+
+0 1 2 3 4 5 6 7 8 9 A B C D E F
+
+where:
+
+    A = 10
+    B = 11
+    C = 12
+    D = 13
+    E = 14
+    F = 15
+
+The really useful trick is:
+
+    1 hexadecimal digit = exactly 4 bits
+
+For example:
+
+A → 1010
+F → 1111
+3 → 0011
+
+Therefore:
+
+A3EA2A → 1010 0011 1110 1010 0010 1010
+
+4. Binary → decimal
+
+Binary uses powers of 2:
+Position	2³	2²	2¹	2⁰
+Value	8	4	2	1
+
+So:
+
+1101 = 8 + 4 + 0 + 1 = 13
+
+5. Hex → decimal
+
+Hexadecimal uses powers of 16.
+
+For 9BDF:
+
+9 × 16³ + 11 × 16² + 13 × 16¹ + 15 × 16⁰
+
+= 36,864 + 2,816 + 208 + 15
+
+= 39,903
+
+6. Octal
+Octal is base 8 and uses 0–7.
+
+The useful relationship is:
+
+    1 octal digit = 3 bits
+
+For example:
+
+7 → 111
+5 → 101
+3 → 011
+
+So 357₈ = 3×64 + 5×8 + 7 = 239₁₀.
+The cheat sheet
+System	Base	Digits	Bit relationship
+Decimal	10	0–9	—
+Binary	2	0–1	1 bit
+Octal	8	0–7	3 bits/digit
+Hexadecimal	16	0–9, A–F	4 bits/digit
+
+Most important cybersecurity takeaway: learn to move comfortably between binary ↔ decimal ↔ hexadecimal. Hex is especially common because it represents binary much more compactly: every 2 hex digits = 1 byte = 8 bits.
