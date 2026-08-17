@@ -1,0 +1,505 @@
+🟨 JavaScript: Simple Demo
+
+JavaScript ek programming language hai jo mostly websites ko interactive banane ke liye use hoti hai.
+
+Example:
+
+    Button click karne par kuch hona
+    Website par popup aana
+    Form validate hona
+    Dynamic content change hona
+    Web applications chalna
+
+JavaScript browser mein run ho sakti hai, aur Node.js ki help se computer/server par bhi run ho sakti hai.
+
+Is room mein hum JavaScript ko Node.js se run kar rahe hain.
+🎮 Game ka idea
+
+Computer secretly 1–20 ke beech number choose karega.
+
+User baar-baar guess karega.
+
+Computer batayega:
+
+Too low
+
+ya
+
+Too high
+
+Aur correct guess par:
+
+You got it!
+
+Exactly Python wale game jaisa.
+
+Difference: logic same hai, lekin Python aur JavaScript ki syntax different hai.
+1️⃣ JavaScript ko run kaise karte hain?
+
+JavaScript file ka naam maan lo:
+
+guess_v3.js
+
+Node.js se run:
+
+node guess_v3.js
+
+Yaani:
+
+.js = JavaScript file
+
+node = JavaScript ko terminal mein run karne ka way
+2️⃣ Variables — let
+
+JavaScript mein variable banane ke liye let use kar sakte hain.
+
+let tries = 0;
+let guess = 0;
+
+Python mein humne likha tha:
+
+tries = 0
+guess = 0
+
+JavaScript mein:
+
+let tries = 0;
+let guess = 0;
+
+tries
+
+User ne kitni attempts ki:
+
+tries = 0
+
+guess
+
+User ka current guess:
+
+guess = 0
+
+3️⃣ let vs const ⭐
+
+Ye JavaScript ka important concept hai.
+let
+
+Aisi value jise future mein change karna hai:
+
+let tries = 0;
+
+Baad mein:
+
+tries = tries + 1;
+
+So tries change ho sakta hai.
+const
+
+Aisi value jo program ke andar change nahi honi chahiye:
+
+const secret = 12;
+
+secret ko baad mein change nahi karna.
+
+Simple yaad rakho:
+
+    let = value change ho sakti hai
+    const = value fixed hai
+
+Game mein secret ko const rakha gaya hai.
+4️⃣ Random secret number 🎲
+
+JavaScript mein random number ke liye:
+
+Math.random()
+
+use hota hai.
+
+Final expression:
+
+const secret = Math.floor(Math.random() * 20) + 1;
+
+Ye thoda confusing lag sakta hai, so break karte hain.
+Math.random()
+
+Math.random()
+
+0 se lekar 1 se chhoti value deta hai.
+
+Example:
+
+0.372
+
+* 20
+
+Math.random() * 20
+
+Example:
+
+0.372 * 20 = 7.44
+
+Math.floor()
+
+Math.floor(7.44)
+
+Decimal hata kar neeche wala integer:
+
+7
+
++ 1
+
+7 + 1 = 8
+
+Isliye final:
+
+const secret = Math.floor(Math.random() * 20) + 1;
+
+1 se 20 ke beech random number milta hai.
+5️⃣ console.log() — print ka JavaScript version
+
+Python mein:
+
+print("Hello")
+
+JavaScript mein:
+
+console.log("Hello");
+
+Game mein:
+
+console.log("I'm thinking of a number between 1 and 20");
+
+Output:
+
+I'm thinking of a number between 1 and 20
+
+So yaad rakho:
+
+Python: print()
+
+JavaScript: console.log()
+6️⃣ User se input lena
+
+JavaScript mein room readline ka use kar raha hai:
+
+import * as readline from "node:readline/promises";
+
+Aur phir:
+
+const rl = readline.createInterface({ input, output });
+
+Ye setup terminal se user ka input lene ke liye hai.
+
+Actual input:
+
+const text = await rl.question("Take a guess: ");
+
+Screen:
+
+Take a guess:
+
+User maan lo:
+
+7
+
+text mein "7" store hota hai.
+7️⃣ parseInt() kya karta hai?
+
+Input initially text/string hota hai.
+
+const text = await rl.question("Take a guess: ");
+
+Agar user 7 enter karta hai, to roughly:
+
+text = "7"
+
+Hume number chahiye.
+
+Isliye:
+
+guess = parseInt(text, 10);
+
+parseInt() text ko integer mein convert karta hai.
+
+"7" → 7
+
+Yahan 10 base 10 ko indicate karta hai.
+
+Beginner level par simply yaad rakho:
+
+    parseInt() = text ko integer/number mein convert karna.
+
+8️⃣ if / else if / else
+
+Ab computer ko user ke guess ko check karna hai.
+
+JavaScript:
+
+if (guess < 1 || guess > 20) {
+    console.log("That number is out of range. Try again.");
+} else if (guess < secret) {
+    console.log("Too low, try again.");
+} else if (guess > secret) {
+    console.log("Too high, try again.");
+} else {
+    console.log("You got it in", tries, "tries!");
+}
+
+Logic bilkul Python jaisa hai.
+if
+
+if (guess < 1 || guess > 20)
+
+|| ka meaning:
+
+    OR
+
+Agar guess:
+
+0
+
+ya:
+
+25
+
+hai, to out of range.
+else if
+
+else if (guess < secret)
+
+Suppose:
+
+secret = 10
+guess = 5
+
+5 < 10
+
+➡️ Too low
+
+Next:
+
+else if (guess > secret)
+
+Suppose:
+
+secret = 10
+guess = 15
+
+15 > 10
+
+➡️ Too high
+else
+
+Agar guess na chhota hai aur na bada, iska matlab:
+
+guess == secret
+
+Correct answer 🎯
+9️⃣ while loop 🔄
+
+Abhi tak user ko sirf one chance mila.
+
+Hume chahiye:
+
+    Jab tak user correct answer nahi deta, baar-baar guess karne do.
+
+JavaScript mein:
+
+while (guess !== secret) {
+    // repeat
+}
+
+!== ka meaning:
+
+    not equal
+
+So:
+
+while (guess !== secret)
+
+means:
+
+    Jab tak guess secret ke equal nahi hai, loop chalate raho.
+
+🔥 Example
+
+Suppose:
+
+secret = 14
+
+Starting:
+
+guess = 0
+
+Check:
+
+0 !== 14
+
+True ✅
+
+User ko guess karne do.
+
+User:
+
+10
+
+Check:
+
+10 !== 14
+
+True ✅
+
+Output:
+
+Too low
+
+Again loop.
+
+User:
+
+18
+
+18 !== 14
+
+True ✅
+
+Output:
+
+Too high
+
+Again.
+
+User:
+
+14
+
+Now:
+
+14 !== 14
+
+False ❌
+
+Loop stop.
+
+Output:
+
+You got it!
+
+🔟 tries kaise work karta hai?
+
+Har guess ke baad:
+
+tries = tries + 1;
+
+Example:
+
+Start → tries = 0
+
+Guess 10 → tries = 1
+
+Guess 18 → tries = 2
+
+Guess 14 → tries = 3
+
+Then:
+
+You got it in 3 tries!
+
+🧠 Poora JavaScript game ka flow
+
+Isko ek story ki tarah yaad karo:
+
+START
+  ↓
+Computer random number choose karta hai
+  ↓
+secret mein store
+  ↓
+tries = 0
+guess = 0
+  ↓
+User se guess lo
+  ↓
+Text ko number mein convert karo
+  ↓
+tries + 1
+  ↓
+Guess check karo
+  ↓
+Out of range?
+  ├── YES → Out of range
+  │
+  └── NO
+       ↓
+    Guess < secret?
+       ├── YES → Too low
+       │
+       └── NO
+            ↓
+         Guess > secret?
+            ├── YES → Too high
+            │
+            └── NO → Correct!
+                         ↓
+                       STOP
+
+🐍 Python vs 🟨 JavaScript
+
+Ye room Python wale room se compare karne ke liye bhi hai.
+Kaam	Python	JavaScript
+Variable	tries = 0	let tries = 0;
+Constant	—	const secret = ...
+Output	print()	console.log()
+Input	input()	rl.question()
+Text → number	int()	parseInt()
+OR	or	`
+Not equal	!=	!==
+Condition	if	if
+Else-if	elif	else if
+Loop	while	while
+
+Python:
+
+elif guess < secret:
+
+JavaScript:
+
+else if (guess < secret) {
+
+Python mein indentation important hai, JavaScript mein { } braces use hote hain.
+⭐ Room ka actual takeaway
+
+Is poore JavaScript: Simple Demo room mein tumhe JavaScript ka pura language master nahi karna.
+
+Bas ye 3 pillars samajhne hain:
+1. Variables
+
+let guess = 0;
+
+Data store karna.
+2. Conditions
+
+if (...) {
+    
+} else if (...) {
+    
+} else {
+    
+}
+
+Decision lena.
+3. Loops
+
+while (guess !== secret) {
+    
+}
+
+Code ko repeat karna.
+🎯 Ek line mein yaad karo
+
+JavaScript: Simple Demo = let/const se data store → if/else se decision → while se repeat → aur console.log() se output.
+
+Aur Python room ke comparison mein:
+
+    Logic same hai, syntax alag hai.
+
+Yahi is TryHackMe room ka sabse important point hai.
