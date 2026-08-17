@@ -56,20 +56,18 @@ IPv4 Address → the machine's IP address
 Default Gateway → the router/network gateway used by the machine
 🧠 Linux vs Windows CLI
 
-Since you just completed Linux CLI Basics, these comparisons are useful:
-
-Task	Linux	Windows CMD
-Current directory	pwd	cd
-List files	ls	dir
-Hidden files	ls -al	dir /a
-Change directory	cd	cd
-Parent directory	cd ..	cd ..
-Find a file	find ~ -name file	dir /s file
-Read file	cat file	type file
-Current user	whoami	whoami
-System information	uname -a	systeminfo
-Network information	ip addr / ifconfig	ipconfig
-⭐ Commands to remember for cybersecurity
+| Task                | Linux                  | Windows CMD   |
+| ------------------- | ---------------------- | ------------- |
+| Current directory   | `pwd`                  | `cd`          |
+| List files          | `ls`                   | `dir`         |
+| Hidden files        | `ls -al`               | `dir /a`      |
+| Change directory    | `cd`                   | `cd`          |
+| Parent directory    | `cd ..`                | `cd ..`       |
+| Find a file         | `find ~ -name file`    | `dir /s file` |
+| Read file           | `cat file`             | `type file`   |
+| Current user        | `whoami`               | `whoami`      |
+| System information  | `uname -a`             | `systeminfo`  |
+| Network information | `ip addr` / `ifconfig` | `ipconfig`    |
 
 If you're given access to an unfamiliar Windows machine, a useful first set is:
 
