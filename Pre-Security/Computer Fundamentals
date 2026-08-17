@@ -240,3 +240,306 @@ Embedded = Built into another device
 “There is no best computer — only the right computer for the job.”
 
 Aur jo flag hai, uske liye static site ka actual link/content mujhe message mein nahi mila. Agar tum “View Site/Static Site” ka link bhej do, main usko inspect karke flag find karne mein help kar dunga.
+
+
+
+
+
+
+--------->🌐 Client-Server Basics — Hinglish Notes
+
+1. Internet & Networks ka Basic Idea
+Pehle computers mostly independently kaam karte the:
+
+Apni files store karte the
+Apne programs run karte the
+Dusre computers se communicate nahi karte the
+
+Baad mein computers ko network se connect kiya gaya taaki:
+
+Information share ho
+Resources/services share ho
+Distance ke across communication ho
+
+Internet ke development mein ARPANET, CYCLADES, NPL, NSFNET jaise networks important the.
+
+🧑‍💻 2. Client-Server Model
+Client-server model mein generally:
+
+Client request karta hai → Server service/resource provide karta hai → Server response deta hai
+
+Example:
+
+Browser se website open karna:
+
+Browser = Client
+Web Server = Server
+
+Browser website ke liye request bhejta hai → Server webpage return karta hai.
+
+⭐ Important:
+
+Client always initiates the request.
+
+🍕 3. Pizza Analogy
+Isko yaad rakhna bahut easy hai:
+
+Alice = User/Client
+Bob = Communication method/protocol analogy
+Luigi's Pizza = Server
+Pizza = Requested service/resource
+
+Flow:
+
+Alice → Request → Bob → Luigi's → Response → Bob → Alice
+
+Computer mein:
+
+Client → Request → Server → Response → Client
+
+📩 4. Request & Response
+Request
+
+Client server se kuch maangta hai.
+
+Example:
+
+"Mujhe website ka homepage chahiye."
+
+Response
+
+Server request ka result bhejta hai.
+
+Agar resource available hai → requested content milta hai.
+
+Agar request galat hai/resource unavailable hai → error response mil sakta hai.
+
+⭐ Remember:
+
+Request = Client → Server
+Response = Server → Client
+
+📜 5. Protocol
+Protocol = Communication ke rules
+
+Jaise humans ko communicate karne ke liye language/rules chahiye, waise computers ko bhi communication ke rules chahiye.
+
+Protocol define karta hai:
+
+Kaunse commands allowed hain
+Request ka format kya hoga
+Syntax kya hoga
+Kis request ka kya response hoga
+Faulty request par kya response dena hai
+Simple definition:
+
+Protocol = Computers ke beech communication ke rules
+
+🚪 6. Port
+Port = Specific service ko identify karne ka endpoint/door.
+
+Ek server par multiple services run ho sakti hain.
+
+Example analogy:
+
+Door A → Takeaway
+Door B → Dine-in
+Door C → Delivery
+
+Computer mein different services different ports par listen kar sakti hain.
+
+🧠 Yaad rakho:
+
+IP address = Kaunsa computer?
+Port = Us computer par kaunsi service?
+
+🌍 7. DNS
+
+DNS = Domain Name System
+
+DNS ka kaam:
+
+Domain name ko IP address mein resolve karna.
+
+Example:
+
+example.com
+⬇️ DNS
+IP Address
+
+GPS Analogy:
+Website name = Place ka naam
+DNS = GPS
+IP address = Actual destination/address
+
+Hum naam yaad rakhte hain; DNS us naam ko corresponding IP address se map karta hai.
+
+🌐 8. HTTP / HTTPS
+
+HTTP = Hypertext Transfer Protocol
+
+Websites ke liye commonly used client-server protocol hai.
+
+HTTPS = HTTP Secure
+
+HTTP ko stateless protocol kaha jaata hai.
+
+Stateless ka meaning:
+
+Server normally har request ko independently process karta hai; previous request ki information automatically remember nahi karta.
+
+Lekin modern websites cookies, session IDs/tokens etc. use karke login/session maintain kar sakti hain.
+
+Example:
+
+Login → Server session ID deta hai → Browser subsequent requests ke saath session information bhejta hai.
+
+📋 9. HTTP Methods
+
+HTTP mein method term use hota hai.
+
+9 core methods:
+
+GET
+POST
+PUT
+DELETE
+PATCH
+HEAD
+OPTIONS
+CONNECT
+TRACE
+⭐ Sabse important for this room:
+
+GET
+
+🔎 10. GET Method
+
+GET = Server se resource retrieve/request karna.
+
+Example:
+
+GET https://tryhackme.com/index.php
+
+Meaning:
+
+Server se index.php resource maango.
+
+Browser mein URL type karne par browser background mein HTTP request create karta hai.
+
+Flow:
+
+Browser → GET Request → Web Server → Response → Browser
+
+🛠️ 11. Browser Developer Tools
+
+GET request ko practically dekhne ke liye:
+
+Firefox → F12 → Network tab → Reload
+
+Network tab mein browser ki requests दिखाई देंगी.
+
+Request select karne par important fields mil sakti hain:
+
+Scheme
+
+Kaunsa protocol use hua?
+
+HTTP / HTTPS
+
+Host
+
+Kis host/server ko request bheji?
+
+Filename
+
+Kaunsa resource/file request kiya?
+
+Example:
+
+/
+
+usually homepage ko represent karta hai.
+
+Address
+
+Server ka IP address.
+
+Example:
+
+127.0.0.1
+
+ka matlab local machine.
+
+Status
+
+Request ka result.
+
+Example:
+
+200 OK = Request successful ✅
+
+📦 12. HTTP Response
+
+Server ka response mainly 2 important parts mein dekha ja sakta hai:
+
+Response Header
+
+Response ke baare mein metadata/information.
+
+Response Body
+
+Actual requested content/data.
+
+Example:
+
+Website ka HTML → Response Body
+
+🔥 Complete Flow — Must Remember
+
+Website open karne par roughly:
+
+User
+⬇️
+Browser (Client)
+⬇️ DNS se domain resolve
+⬇️
+IP Address + Port
+⬇️
+HTTP/HTTPS Request (e.g. GET)
+⬇️
+Server
+⬇️
+HTTP Response
+⬇️
+Browser
+⬇️
+Webpage
+
+🧠 Super Short Revision
+Concept	Yaad Rakho
+Client	Request initiate karta hai
+Server	Service/resource provide karta hai
+Request	Client → Server
+Response	Server → Client
+Protocol	Communication ke rules
+Port	Specific service ka "door"
+DNS	Domain → IP address
+IP Address	Computer/server ka network address
+HTTP/HTTPS	Web communication protocols
+GET	Resource retrieve karna
+Header	Response/request metadata
+Body	Actual content
+200 OK	Request successful
+127.0.0.1	Local machine/localhost
+🎯 Ek line mein pura room:
+
+Client DNS se server ka IP find karta hai, correct port par protocol (HTTP/HTTPS) ke through request bhejta hai; server request process karke response deta hai.
+
+🧠 5 keywords pakad lo:
+
+Client → Server → Port → Protocol → DNS
+
+Aur web browsing ke liye:
+
+DNS → IP → Port → HTTP GET → Server → Response → Browser
