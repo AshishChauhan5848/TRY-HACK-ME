@@ -1,0 +1,395 @@
+🗄️ 1. Database kya hota hai?
+
+Simple language mein:
+
+Database = information ko organised way mein store karne ki jagah.
+
+Example: Ek café hai.
+
+Café mein roz bahut orders aate hain:
+
+Coffee - ₹50 - 10:30
+Tea    - ₹30 - 10:35
+Coffee - ₹50 - 10:40
+Cake   - ₹80 - 10:45
+
+Agar owner ye sab ek notebook mein likhe, initially easy hai.
+
+Lekin agar 10,000 orders ho jayein, aur owner pooche:
+
+    "Aaj kitni coffee sell hui?"
+
+Notebook mein manually search karna difficult hoga.
+
+Database computer ko ye kaam quickly karne deta hai.
+📊 2. Table kya hoti hai?
+
+Database ke andar data generally tables mein organised hota hai.
+
+Spreadsheet/Excel sheet jaisa samjho.
+
+Café ka Orders table:
+id	drink	price	time
+1	Coffee	50	10:30
+2	Tea	30	10:35
+3	Coffee	50	10:40
+
+Yahan:
+Column
+
+Column batata hai ki kis type ki information hai.
+
+id
+drink
+price
+time
+
+For example:
+
+price column → prices store karega.
+Row
+
+Ek complete record ko row kehte hain.
+
+Example:
+
+3 | Coffee | 50 | 10:40
+
+Ye ek complete café order hai.
+Easy trick:
+
+    Column = information ka type
+    Row = ek complete record
+
+Agar café ne 50 orders liye, to Orders table mein 50 rows ho sakti hain.
+🍽️ 3. Is room mein 2 tables hain
+Orders
+
+Orders(id, drink, price, time)
+
+Isme actual orders hain.
+Menu
+
+Menu(drink, price)
+
+Isme café ke available drinks aur unki prices hain.
+🧠 4. SQL kya hai?
+
+SQL ka full form hai:
+
+Structured Query Language
+
+SQL ka use database se questions/instructions dene ke liye hota hai.
+
+Example:
+
+    "Mujhe saare orders dikhao."
+
+SQL:
+
+SELECT * FROM Orders;
+
+SQL ko tum database se baat karne ki language samajh sakte ho.
+5. SELECT — kya chahiye?
+
+SELECT batata hai:
+
+    Mujhe kaunsa data chahiye?
+
+Example:
+
+SELECT drink, price FROM Orders;
+
+Meaning:
+
+    Orders table se sirf drink aur price dikhao.
+
+Result roughly:
+
+Coffee  50
+Tea     30
+Coffee  50
+Cake    80
+
+6. * ka kya meaning hai?
+
+SQL mein:
+
+SELECT *
+
+* means:
+
+    All columns
+
+So:
+
+SELECT * FROM Orders;
+
+means:
+
+    Orders table ke saare columns aur saari rows dikhao.
+
+Output mein:
+
+id
+drink
+price
+time
+
+sab aayega.
+7. FROM — data kahan se lena hai?
+
+FROM batata hai:
+
+    Data kis table se chahiye?
+
+Example:
+
+SELECT * FROM Orders;
+
+Breakdown:
+
+SELECT *  → sab kuch chahiye
+FROM      → kahan se?
+Orders    → Orders table se
+
+So:
+
+SELECT = kya chahiye?
+
+FROM = kahan se chahiye?
+8. WHERE — Filter lagana 🔍
+
+Ab maan lo tumhe sirf Coffee orders chahiye.
+
+Use:
+
+SELECT * FROM Orders WHERE drink = 'Coffee';
+
+Meaning:
+
+    Orders table mein se sirf woh rows dikhao jahan drink Coffee hai.
+
+Agar table:
+id	drink	price
+1	Coffee	50
+2	Tea	30
+3	Coffee	50
+4	Cake	80
+
+Query:
+
+SELECT * FROM Orders WHERE drink = 'Coffee';
+
+Result:
+id	drink	price
+1	Coffee	50
+3	Coffee	50
+Easy meaning:
+
+WHERE = condition/filter
+9. ORDER BY — Data ko sort karna 🔢
+
+Suppose prices hain:
+
+80
+30
+50
+40
+
+Tumhe cheapest se expensive order chahiye.
+
+SELECT * FROM Orders ORDER BY price;
+
+Default order:
+
+Ascending = low → high
+
+30
+40
+50
+80
+
+DESC
+
+Agar high → low chahiye:
+
+SELECT * FROM Orders ORDER BY price DESC;
+
+Result:
+
+80
+50
+40
+30
+
+Yaad rakho:
+
+ORDER BY price
+
+→ Low → High
+
+ORDER BY price DESC
+
+→ High → Low
+🔥 10. WHERE + ORDER BY together
+
+Real life mein queries combine hoti hain.
+
+Suppose:
+
+    "Sirf Coffee orders dikhao aur sabse expensive Coffee pehle dikhao."
+
+Query:
+
+SELECT * FROM Orders
+WHERE drink = 'Coffee'
+ORDER BY price DESC;
+
+Isko pieces mein dekho:
+
+SELECT *
+
+→ sab columns
+
+FROM Orders
+
+→ Orders table se
+
+WHERE drink = 'Coffee'
+
+→ sirf Coffee
+
+ORDER BY price DESC
+
+→ price high se low
+🧩 11. SQL ko ek sentence ki tarah padho
+
+Query:
+
+SELECT drink, price
+FROM Orders
+WHERE drink = 'Coffee'
+ORDER BY price DESC;
+
+Human language mein:
+
+    Orders table se drink aur price dikhao, sirf Coffee wale records rakho, aur price ko highest se lowest sort karo.
+
+Bas! SQL ka basic idea yehi hai.
+⭐ 12. 4 SQL commands sabse important
+
+Is room ke liye ye 4 sabse important hain:
+SELECT
+
+Kya data chahiye?
+
+SELECT drink, price
+
+FROM
+
+Kis table se?
+
+FROM Orders
+
+WHERE
+
+Kaunsi rows chahiye?
+
+WHERE drink = 'Coffee'
+
+ORDER BY
+
+Kis order mein chahiye?
+
+ORDER BY price DESC
+
+🧠 Ek real-life example
+
+Maan lo database mein 1000 café orders hain.
+
+Tum puchte ho:
+"Saare orders dikhao"
+
+SELECT * FROM Orders;
+
+"Sirf drinks aur prices dikhao"
+
+SELECT drink, price FROM Orders;
+
+"Sirf Coffee orders dikhao"
+
+SELECT * FROM Orders WHERE drink = 'Coffee';
+
+"Orders ko cheapest se expensive sort karo"
+
+SELECT * FROM Orders ORDER BY price;
+
+"Orders ko expensive se cheapest sort karo"
+
+SELECT * FROM Orders ORDER BY price DESC;
+
+"Sirf Coffee aur highest price pehle"
+
+SELECT * FROM Orders
+WHERE drink = 'Coffee'
+ORDER BY price DESC;
+
+⚠️ Ek important baat
+
+Room mein ek interesting security question bhi hai:
+
+    Agar kisi unauthorized person ko café ke orders change/delete karne ki permission mil jaye to?
+
+Wo data:
+
+    modify kar sakta hai
+    delete kar sakta hai
+    incorrect information insert kar sakta hai
+
+Isliye real-world databases mein permissions/access control bahut important hote hain.
+
+Abhi room ka focus mainly data retrieve karna hai, yani SELECT queries.
+🎯 Python/JavaScript rooms se connection
+
+Ab tak tumne:
+Python
+
+Variables
+if/else
+while
+
+JavaScript
+
+Variables
+if/else
+while
+
+seekha.
+
+Ab Database SQL Basics mein:
+
+Database
+ ↓
+Tables
+ ↓
+Rows + Columns
+ ↓
+SQL
+ ↓
+SELECT
+FROM
+WHERE
+ORDER BY
+
+🔥 Ek line mein poora room
+
+Database = organised data storage, Table = data ka structure, Row = ek record, Column = information ka type, aur SQL = database se data ke baare mein questions poochne ki language.
+
+Aur 4 commands ko bas ye yaad rakho:
+
+    SELECT = kya chahiye?
+    FROM = kahan se chahiye?
+    WHERE = kya filter karna hai?
+    ORDER BY = kis order mein chahiye?
+
