@@ -1,0 +1,133 @@
+💻 Computer Fundamentals — Quick Hinglish Notes
+1. Computer kya hai?
+
+Computer ek electronic machine hai jo:
+
+Input → Processing → Storage → Output
+
+ke through user ko services/results provide karta hai.
+
+Cybersecurity ke liye computer ke components aur unka interaction samajhna important hai.
+
+🧩 2. Core Components
+
+Computer ke important components:
+
+CPU (Processor) → Instructions ko execute karta hai, basically computer ka brain.
+RAM (Random Access Memory) → Temporary working memory; currently running programs/data yahan rehte hain.
+Storage (HDD/SSD) → Data aur Operating System ko permanently store karta hai.
+Motherboard → Sabhi components ko connect karta hai.
+PSU (Power Supply Unit) → Computer ke components ko power provide karta hai.
+Firmware → Computer ko start/initialize karne ke liye low-level software.
+Operating System (OS) → Hardware aur user/applications ke beech manage/interface karta hai.
+🧠 Easy analogy:
+
+CPU = Brain
+RAM = Short-term memory
+Storage = Long-term memory
+Motherboard = Nervous system/connection network
+PSU = Energy source
+OS = Manager
+
+🚀 3. Boot Process
+
+Computer start hone par roughly ye 5 steps hote hain:
+
+Step 1 — Power Button 🔌
+
+Power button press karte hain → signal PSU ko jaata hai → PSU components ko power deta hai.
+
+Remember:
+Power Button → PSU → Power ON
+
+Step 2 — Firmware Starts ⚙️
+
+Power milne ke baad firmware start hota hai.
+
+Modern systems mein mainly:
+
+UEFI = Unified Extensible Firmware Interface
+
+Old systems mein BIOS use hota tha.
+
+Remember:
+UEFI/BIOS = Computer startup ka initial manager
+
+Step 3 — POST 🔍
+
+UEFI Power-On Self Test (POST) run karta hai.
+
+POST check karta hai:
+
+Required hardware present hai?
+Correctly configured hai?
+Properly functioning hai?
+
+Agar problem ho toh system error/alarm signals de sakta hai.
+
+Remember:
+POST = Hardware health check
+
+Step 4 — Boot Device Select 💾
+
+UEFI ke paas boot devices ki priority/order list hoti hai.
+
+Ye decide karta hai ki Operating System ka boot routine kis device se load karna hai.
+
+Example:
+
+SSD → USB → Network
+
+(priority system ke configuration par depend karti hai)
+
+Remember:
+UEFI → Boot device choose karta hai
+
+Step 5 — Bootloader Initiates 🚀
+
+Selected boot device par bootloader start hota hai.
+
+Bootloader:
+
+OS ko Storage se RAM mein load karta hai.
+
+Phir UEFI control Operating System ko hand over kar deta hai.
+
+Remember:
+Storage → Bootloader → RAM → OS
+
+⭐ Complete Boot Process — 1 Line
+
+Power Button → PSU → UEFI → POST → Boot Device → Bootloader → RAM → OS
+
+Is line ko yaad kar lo. 🔥
+
+🔐 4. Cybersecurity ke liye Boot Process Important kyun?
+
+Boot process security mein important hai kyunki attacker kabhi-kabhi OS start hone se pehle wale stages ko target kar sakta hai.
+
+Isliye cybersecurity mein hardware, firmware, bootloader, OS etc. ka role samajhna zaroori hai.
+
+📝 Super Short Revision
+Term	Simple Meaning
+CPU	Instructions execute karta hai
+RAM	Temporary working memory
+Storage	Permanent data storage
+Motherboard	Components ko connect karta hai
+PSU	Power provide karta hai
+UEFI	Startup firmware
+BIOS	Older firmware system
+POST	Hardware check
+Boot Device	Jahan se OS boot hota hai
+Bootloader	OS ko RAM mein load karta hai
+OS	Computer resources/user interaction manage karta hai
+🧠 Ekdum yaad rakhne wali trick:
+
+“Power → UEFI → Check → Choose → Load → OS”
+
+Power = PSU
+UEFI = Firmware
+Check = POST
+Choose = Boot Device
+Load = Bootloader → RAM
+OS = Finally system ready ✅
