@@ -1,0 +1,34 @@
+🐧 Linux CLI Basics Cheat Sheet
+| Goal                   | Command               | What it does                                   |
+| ---------------------- | --------------------- | ---------------------------------------------- |
+| Show current directory | `pwd`                 | Prints the working directory                   |
+| List files             | `ls`                  | Lists contents                                 |
+| Detailed listing       | `ls -l`               | Shows permissions, owner, size, dates, etc.    |
+| Include hidden files   | `ls -al`              | Lists everything, including dotfiles           |
+| Change directory       | `cd <dir>`            | Moves into a directory                         |
+| Go up one level        | `cd ..`               | Moves to the parent directory                  |
+| Go home                | `cd ~`                | Moves to your home directory                   |
+| Find a file            | `find ~ -name <file>` | Searches your home directory                   |
+| Read a file            | `cat <file>`          | Displays its contents                          |
+| Current username       | `whoami`              | Shows the logged-in user                       |
+| Kernel/system info     | `uname -a`            | Shows detailed kernel/system information       |
+| Kernel name only       | `uname`               | Usually outputs `Linux`                        |
+| Disk usage             | `df -h`               | Shows filesystem space in human-readable units |
+| OS information         | `cat /etc/os-release` | Shows Linux distribution/version               |
+
+🧪 Mini Challenge
+
+For day1_report.txt, the intended sequence is:
+</bash>
+find ~ -name day1_report.txt
+
+Then use the path returned by find:
+</bash>
+cd <directory-containing-the-file>
+
+Then:
+</bash>
+cat day1_report.txt
+
+The contents of day1_report.txt provide the information needed for the final question.
+If you're answering TryHackMe questions from this room, paste the question(s) here and I can give you the exact answer and explain why.
