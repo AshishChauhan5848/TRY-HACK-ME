@@ -1,0 +1,137 @@
+🔐 Core Security Concepts
+
+The three pillars of the CIA triad are:
+
+Confidentiality — only authorised people can access information.
+Integrity — information cannot be modified or tampered with improperly.
+Availability — systems and data remain accessible when needed.
+Common weaknesses covered
+Authentication & weak passwords
+Weak/reused passwords can allow attackers to gain access.
+Examples of predictable passwords include 123456, password, qwerty, and dragon.
+Weak file permissions
+Can violate confidentiality by allowing unauthorised reading.
+Can violate integrity by allowing unauthorised modification.
+Malicious programs
+Trojans can compromise confidentiality/integrity.
+Ransomware primarily attacks availability by encrypting files.
+✅ Question: Which is NOT an operating system?
+
+Options:
+
+AIX → OS
+Android → OS
+Chrome OS → OS
+Solaris → OS
+Thunderbird → ❌ Not an OS
+Answer: Thunderbird
+
+Mozilla Thunderbird is an email client/application, not an operating system.
+
+👤 Authentication
+
+Three common authentication factors:
+
+Factor	Example
+Something you know	Password, PIN
+Something you are	Fingerprint, face
+Something you have	Phone/security token
+
+Remember: passwords are something you know.
+
+🐧 Linux Commands in the Lab
+Connect through SSH
+ssh sammie@MACHINE_IP
+
+The password given in the scenario is:
+
+dragon
+
+When entering an SSH password, nothing appears on screen—no dots or stars. That's normal.
+
+Identify the current user
+whoami
+
+For the initial login:
+
+sammie
+List files
+ls
+
+Example:
+
+country.txt
+draft.md
+icon.png
+password.txt
+profile.jpg
+Read a file
+cat draft.md
+View command history
+history
+
+history is particularly useful in security investigations because it can reveal commands previously executed by a user.
+
+👑 Privileged Accounts
+
+The highly privileged account is called:
+
+root → Linux, Android, Apple/Unix-like systems
+administrator → Windows
+
+These accounts have extensive/unrestricted control over the system.
+
+🔑 Useful Commands to Remember
+whoami
+
+→ Who am I logged in as?
+
+ssh USERNAME@MACHINE_IP
+
+→ Connect to a remote machine using SSH.
+
+ls
+
+→ List files.
+
+cat FILENAME
+
+→ Display a file's contents.
+
+history
+
+→ Display previously executed commands.
+
+One important distinction
+
+ssh and su are different:
+
+ssh johnny@MACHINE_IP
+
+connects to a remote system as Johnny.
+
+su - johnny
+
+switches to Johnny's account on the current system.
+
+🎯 Key answers likely to appear in this room
+
+Not an operating system: Thunderbird
+
+CIA triad: Confidentiality, Integrity, Availability
+
+Linux administrator account: root
+
+Windows administrator account: administrator
+
+Current user command: whoami
+
+List files: ls
+
+Read a file: cat
+
+Show command history: history
+
+Remote login: ssh USERNAME@MACHINE_IP
+
+Switch user: su - USERNAME
