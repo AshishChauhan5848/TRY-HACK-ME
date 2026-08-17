@@ -1,0 +1,90 @@
+🪟 Windows CLI Basics Cheat Sheet
+📁 File and directory navigation
+Goal	Command	Purpose
+Show current directory	cd	Displays your current path
+List files/folders	dir	Lists contents of the current directory
+Show hidden items	dir /a	Lists hidden and system items too
+Enter a folder	cd folder_name	Changes to that folder
+Go up one level	cd ..	Moves to the parent directory
+Search recursively	dir /s filename	Searches current directory and all subdirectories
+Read a text file	type filename.txt	Displays the file contents
+🔎 Finding the mission file
+
+For the room's challenge:
+
+dir /s task_brief.txt
+
+This searches the current directory and its subdirectories for task_brief.txt.
+
+Once you get the path:
+
+cd <path>
+
+Confirm the file:
+
+dir
+
+Then read it:
+
+type task_brief.txt
+🖥️ System information
+Question	Command	What it tells you
+Who am I?	whoami	Current username/account
+What's this computer called?	hostname	Computer/host name
+What Windows version?	systeminfo	OS name, version, system type, hardware, etc.
+What's my network configuration?	ipconfig	IPv4 address, gateway, adapter information
+Important systeminfo fields
+
+When you run:
+
+systeminfo
+
+pay particular attention to:
+
+OS Name → Windows edition/name
+OS Version → Windows version/build
+System Type → 32-bit or 64-bit architecture
+Important ipconfig fields
+
+Run:
+
+ipconfig
+
+Look for:
+
+IPv4 Address → the machine's IP address
+Default Gateway → the router/network gateway used by the machine
+🧠 Linux vs Windows CLI
+
+Since you just completed Linux CLI Basics, these comparisons are useful:
+
+Task	Linux	Windows CMD
+Current directory	pwd	cd
+List files	ls	dir
+Hidden files	ls -al	dir /a
+Change directory	cd	cd
+Parent directory	cd ..	cd ..
+Find a file	find ~ -name file	dir /s file
+Read file	cat file	type file
+Current user	whoami	whoami
+System information	uname -a	systeminfo
+Network information	ip addr / ifconfig	ipconfig
+⭐ Commands to remember for cybersecurity
+
+If you're given access to an unfamiliar Windows machine, a useful first set is:
+
+whoami
+hostname
+systeminfo
+ipconfig
+dir /a
+
+These quickly tell you who you are, what machine you're on, what OS it's running, and how it's connected to the network.
+
+For the file-hunting portion, remember the key command:
+
+dir /s filename
+
+And for reading the discovered file:
+
+type filename
