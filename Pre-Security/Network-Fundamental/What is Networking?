@@ -1,1 +1,247 @@
+Bilkul 👍 Main is TryHackMe Networking Basics wale content ko simple Hinglish mein samjha deta hoon.
 
+1. Network kya hota hai?
+
+Simple language mein:
+
+Network = 2 ya 2 se zyada devices ka connected hona.
+
+Jaise:
+
+Tumhara phone + laptop Wi-Fi se connected hain.
+Office ke saare computers ek network mein hain.
+City mein buses/trains ka connected system bhi ek type ka network hai.
+
+Computing mein devices ho sakte hain:
+
+Laptop
+Mobile
+Server
+CCTV camera
+Traffic light
+Smart devices
+2. Internet kya hai?
+
+Internet = bahut saare chhote networks ka ek huge network.
+
+Example:
+
+Socho Alice, Bob aur Jim friends hain → ek chhota network.
+
+Ab Alice ki friendship Zayn aur Toby se bhi hai. Alice un dono ko Bob/Jim se connect karwa sakti hai.
+
+Computers mein bhi exactly isi concept ka large-scale version hota hai.
+
+Internet ke 2 broad types samjho:
+
+Private Network
+→ Ek limited/local network, jaise ghar ka Wi-Fi.
+
+Public Network
+→ Aise networks jo different private networks ko connect karte hain — broadly, Internet.
+
+3. IP Address kya hai?
+
+IP address ko device ka network address samjho.
+
+Jaise tumhare ghar ka address hota hai jahan parcel deliver hota hai, waise network mein IP address device ko locate/identify karne mein help karta hai.
+
+Example IPv4:
+
+192.168.1.77
+
+IPv4 address mein 4 parts (octets) hote hain:
+
+192 . 168 . 1 . 77
+
+Har part ki value generally 0–255 ke beech hoti hai.
+
+Important:
+
+IP address change ho sakta hai.
+
+For example, tumhara laptop aaj:
+
+192.168.1.77
+
+use kar raha ho, aur baad mein router tumhe koi doosra private IP de sakta hai.
+
+4. Public IP vs Private IP
+
+Ye bahut important hai.
+
+Private IP
+
+Local network ke andar device ko identify karta hai.
+
+Example:
+
+192.168.1.77
+
+Agar tumhare ghar mein laptop aur phone hain, dono ke alag private IP ho sakte hain:
+
+Laptop → 192.168.1.77
+Phone  → 192.168.1.74
+
+
+Ye dono ek doosre se local network par communicate kar sakte hain.
+
+Public IP
+
+Internet par tumhare network ko identify karta hai.
+
+Example:
+
+Laptop → 192.168.1.77 ┐
+                     ├→ Router → Public IP → Internet
+Phone  → 192.168.1.74 ┘
+
+
+Isliye ek hi ghar ke multiple devices same public IP se Internet par appear kar sakte hain.
+
+5. IPv4 aur IPv6
+IPv4
+
+IPv4 mein 32 bits hote hain.
+
+Isliye total possible addresses:
+
+2³² ≈ 4.29 billion
+
+Problem ye hai ki Internet par devices bahut zyada ho gaye hain.
+
+IPv6
+
+IPv6 mein 128 bits hote hain.
+
+Total possibilities:
+
+2¹²⁸
+
+Ye IPv4 se enormously zyada addresses provide karta hai.
+
+Yaad rakho:
+
+IPv4 = 32-bit
+IPv6 = 128-bit
+
+6. MAC Address kya hai?
+
+MAC address ko device ke network hardware ka unique identifier samjho.
+
+Example:
+
+a4:c3:f0:85:ac:2d
+
+Ye hexadecimal format mein hota hai.
+
+Usually:
+
+a4:c3:f0 : 85:ac:2d
+   ↓          ↓
+Manufacturer  Unique part
+
+
+Simple analogy:
+
+IP address → ghar ka temporary/addressable location
+MAC address → network hardware ka identity/serial-number jaisa
+Important difference
+
+IP address change ho sakta hai.
+
+MAC address normally network interface ke hardware se associated hota hai, although software ke through MAC ko spoof/change kiya ja sakta hai.
+
+7. MAC Spoofing kya hai?
+
+Spoofing = apni identity ko kisi doosre device jaisa dikhana.
+
+Example:
+
+Hotel Wi-Fi mein:
+
+Alice → MAC = AAAA → Paid → Internet allowed ✅
+
+Bob   → MAC = BBBB → Not paid → Blocked ❌
+
+
+Agar Bob apna MAC address Alice ke MAC jaisa kar de:
+
+Bob → MAC = AAAA
+
+
+To poorly designed system Bob ko Alice samajh sakta hai.
+
+Isi ko MAC spoofing kehte hain.
+
+⚠️ Real networks mein authorization bypass karna illegal/unauthorized ho sakta hai; TryHackMe lab mein ye concept safely practice karne ke liye diya gaya hai.
+
+8. Ping kya hai?
+
+Ping = check karna ki ek device/network destination reachable hai ya nahi, aur response kitni jaldi aa raha hai.
+
+Ping ICMP protocol use karta hai.
+
+Basic idea:
+
+Your computer
+     |
+     | ICMP Echo Request
+     ↓
+ Target
+     |
+     | ICMP Echo Reply
+     ↓
+Your computer
+
+
+Agar target reply karta hai, tumhe response time milta hai.
+
+Example:
+
+Reply from 192.168.1.254
+time=4ms
+
+
+Matlab target reachable hai aur response approximately 4 milliseconds mein aaya.
+
+9. Tumhare TryHackMe task mein kya karna hai?
+
+Question mein specifically bola hai:
+
+8.8.8.8 ko ping karo.
+
+Linux terminal mein:
+
+ping 8.8.8.8
+
+
+Windows par:
+
+ping 8.8.8.8
+
+
+TryHackMe ke deployable website/machine par ye command run karni hai.
+
+Task ke according, correct address ko ping karne par flag reveal hoga, jise question ke answer ke roop mein submit karna hai.
+
+🧠 Quick Revision
+Concept	Simple meaning
+Network	Connected devices
+Internet	Networks ka network
+Private IP	Local network mein device ka address
+Public IP	Internet par network ka address
+IPv4	32-bit addressing
+IPv6	128-bit addressing
+MAC Address	Network hardware identifier
+MAC Spoofing	MAC identity ko fake karna
+Ping	Connectivity/response check
+ICMP	Ping mein commonly used protocol
+Sabse important yaad rakho:
+
+IP = network address
+MAC = hardware/network-interface identity
+Private IP = local network
+Public IP = Internet
+Ping = connectivity check
+ICMP = ping ka protocol
