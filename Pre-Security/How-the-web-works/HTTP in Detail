@@ -1,0 +1,658 @@
+Bilkul 👍 Ye pura section HTTP/HTTPS + URL + Requests/Responses + Methods + Status Codes + Headers + Cookies ke baare mein hai. Isko cybersecurity/CTF perspective se simple Hinglish mein samjho.
+
+🌐 1. HTTP kya hai?
+
+HTTP = HyperText Transfer Protocol
+
+Simple language mein:
+
+HTTP web browser aur web server ke beech communication ke rules hain.
+
+Jab tum browser mein website open karte ho:
+
+Browser
+   ↓ HTTP Request
+Web Server
+   ↓ HTTP Response
+Browser
+
+
+Example:
+
+Browser → "Mujhe homepage chahiye"
+Server  → "Ye raha homepage"
+
+
+HTTP ke through HTML, images, videos, CSS, JavaScript etc. transfer ho sakte hain.
+
+🔐 2. HTTPS kya hai?
+
+HTTPS = HTTP Secure
+
+HTTPS basically HTTP communication ko TLS encryption/security ke saath protect karta hai.
+
+Simple:
+
+HTTP
+Browser ───────────── Server
+       readable traffic
+
+HTTPS
+Browser ═════════════ Server
+       encrypted traffic
+
+
+HTTPS ka purpose:
+
+🔒 Confidentiality
+
+Traffic ko beech mein dekhna difficult hota hai because data encrypted hota hai.
+
+✅ Server authentication
+
+TLS certificates help karte hain verify karne mein ki connection expected server/domain se establish ho raha hai.
+
+🛡️ Integrity
+
+Data ko transit mein tamper kiya gaya hai ya nahi, uski protection milti hai.
+
+🔗 3. URL kya hai?
+
+URL = Uniform Resource Locator
+
+URL basically browser ko batata hai:
+
+Kis protocol se, kis server par, kis resource ko access karna hai.
+
+Example:
+
+http://user:password@tryhackme.com:80/view-room?id=1#task3
+
+
+Isko pieces mein todte hain:
+
+http://
+   ↓
+scheme
+
+user:password@
+   ↓
+credentials
+
+tryhackme.com
+   ↓
+host
+
+:80
+   ↓
+port
+
+/view-room
+   ↓
+path
+
+?id=1
+   ↓
+query string
+
+#task3
+   ↓
+fragment
+
+4. URL ke parts 🧩
+Scheme
+http://
+https://
+ftp://
+
+
+Batata hai kaunsa protocol/use scheme use karna hai.
+
+User
+
+Example:
+
+user:password@
+
+
+Historically URL mein credentials include kiye ja sakte hain.
+
+Note: Real-world use mein credentials ko URL mein rakhna generally avoid kiya jata hai because URLs logs/history mein expose ho sakte hain.
+
+Host
+tryhackme.com
+
+
+Ya IP address:
+
+192.168.1.10
+
+
+Ye batata hai kis server ko access karna hai.
+
+Port
+:80
+
+
+Port batata hai kis network service ko connect karna hai.
+
+Common:
+
+HTTP  → 80
+HTTPS → 443
+
+
+Lekin technically services other ports par bhi run kar sakti hain.
+
+Path
+/view-room
+
+
+Server par requested resource/location ko identify karta hai.
+
+Query String
+?id=1
+
+
+Server ko additional information/parameters bhej sakta hai.
+
+Example:
+
+/blog?id=10
+
+
+Meaning:
+
+Blog resource se ID 10 wala content chahiye.
+
+Multiple parameters:
+
+/search?q=dns&page=2
+
+Fragment
+#task3
+
+
+Ye page ke specific location/section ko refer karta hai.
+
+Important point:
+
+Fragment generally browser-side hota hai aur normally HTTP request mein server ko send nahi hota.
+
+📩 5. HTTP Request
+
+Browser server ko request bhejta hai.
+
+Example:
+
+GET / HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0 Firefox/87.0
+Referer: https://tryhackme.com/
+
+
+
+Breakdown:
+
+GET
+GET /
+
+
+Browser bol raha hai:
+
+"Mujhe / resource chahiye."
+
+HTTP/1.1
+
+HTTP protocol version.
+
+Host
+Host: tryhackme.com
+
+
+Server ko batata hai kaunsi website/resource target hai.
+
+Ek server multiple websites host kar sakta hai, isliye Host header important hai.
+
+User-Agent
+User-Agent: Mozilla/5.0 ...
+
+
+Client/browser ke baare mein information.
+
+Referer
+
+Batata hai request kis previous page/context se aayi.
+
+Blank line
+
+Headers ke end ko indicate karti hai.
+
+📤 6. HTTP Response
+
+Server request ka answer deta hai:
+
+HTTP/1.1 200 OK
+
+Server: nginx/1.15.8
+Date: ...
+Content-Type: text/html
+Content-Length: 98
+
+<html>
+...
+</html>
+
+
+First line:
+
+HTTP/1.1 200 OK
+
+
+Ismein:
+
+HTTP/1.1 → protocol version
+200      → status code
+OK       → status message
+
+📊 7. HTTP Status Codes
+
+Ye bahut important hain.
+
+Range	Meaning
+100–199	Informational
+200–299	Success
+300–399	Redirection
+400–499	Client error
+500–599	Server error
+
+Easy trick:
+
+1xx → "Wait / information"
+2xx → "Success ✅"
+3xx → "Go somewhere else ↪️"
+4xx → "Tumhari request mein problem ❌"
+5xx → "Server ki problem 💥"
+
+⭐ Important Status Codes
+200 OK
+
+Request successful.
+
+200 = Everything good ✅
+
+201 Created
+
+New resource successfully create hua.
+
+Example:
+
+POST /users
+→ 201 Created
+
+301 Moved Permanently
+
+Resource permanently doosri location par move ho gaya.
+
+302 Found
+
+Temporary redirect.
+
+400 Bad Request
+
+Request malformed/incorrect hai.
+
+Example:
+
+Missing parameter
+Invalid syntax
+
+401 Unauthorized
+
+Authentication required/failed.
+
+Example:
+
+Login required
+
+
+Yaad rakho:
+
+401 → Authentication problem
+
+403 Forbidden
+
+Server ne request samajh li, but access deny kar diya.
+
+403 → "I know what you want, but NO."
+
+404 Not Found
+
+Requested resource nahi mila.
+
+404 → Page doesn't exist
+
+405 Method Not Allowed
+
+Resource exist karta hai, but HTTP method allowed nahi.
+
+Example:
+
+/create-account
+
+
+expects:
+
+POST
+
+
+but tum:
+
+GET
+
+
+bhej rahe ho.
+
+Result:
+
+405 Method Not Allowed
+
+500 Internal Server Error
+
+Server ke andar unexpected problem.
+
+503 Service Unavailable
+
+Server temporarily request handle nahi kar pa raha.
+
+Possible reasons:
+
+Maintenance
+Overload
+Service unavailable
+🛠️ 8. HTTP Methods
+
+HTTP method server ko batata hai:
+
+"Main tumse kya action karwana chahta hoon?"
+
+GET
+
+Data retrieve karna.
+
+GET /products
+
+
+"Products do."
+
+POST
+
+Data submit/create karna.
+
+POST /users
+
+
+"Ye new user create karo."
+
+PUT
+
+Existing resource ko update/replace karna.
+
+PUT /users/10
+
+DELETE
+
+Resource delete karna.
+
+DELETE /users/10
+
+Shortcut:
+GET    → Read
+POST   → Create/Submit
+PUT    → Update
+DELETE → Delete
+
+📋 9. HTTP Headers
+
+Headers = extra information/metadata jo request/response ke saath bheji jaati hai.
+
+Request Headers
+
+Client → Server
+
+Host
+Host: example.com
+
+
+Kaunsi website/resource target hai.
+
+User-Agent
+User-Agent: Mozilla/5.0
+
+
+Browser/client information.
+
+Content-Length
+
+Batata hai request body mein kitna data expected hai.
+
+Mostly POST/PUT jaise requests mein useful.
+
+Accept-Encoding
+
+Client kaunsa compression support karta hai.
+
+Example:
+
+Accept-Encoding: gzip
+
+Cookie
+
+Client server ko previously stored cookie bhejta hai.
+
+Cookie: session=abc123
+
+Response Headers
+
+Server → Client
+
+Set-Cookie
+
+Server browser ko cookie store karne ko bolta hai.
+
+Set-Cookie: session=abc123
+
+Cache-Control
+
+Browser/proxy ko batata hai response ko cache kaise handle karna hai.
+
+Content-Type
+
+Extremely important.
+
+Batata hai returned data kis type ka hai.
+
+Examples:
+
+text/html
+text/css
+application/javascript
+image/png
+application/pdf
+video/mp4
+
+
+Browser is information se decide karta hai data ko kaise process karna hai.
+
+Content-Encoding
+
+Response kis compression method se encoded/compressed hai.
+
+🍪 10. Cookies
+
+Cookie ko simple language mein:
+
+Browser mein stored small piece of website-related data.
+
+HTTP itself stateless hai.
+
+Meaning:
+
+Request 1 → Server
+Request 2 → Server
+Request 3 → Server
+
+
+Server inherently automatically ye assume nahi karta ki teeno requests same user/session se hain.
+
+Cookies is problem ko solve karne mein help karti hain.
+
+🔑 Login Example
+
+Suppose tum website par login karte ho.
+
+Server:
+
+Set-Cookie: session=abc123
+
+
+Browser cookie store kar leta hai.
+
+Next request:
+
+Cookie: session=abc123
+
+
+Server samajh sakta hai:
+
+"Ye existing logged-in session hai."
+
+🧠 Cookie ka important point
+
+Cookie mein usually directly:
+
+password=myPassword123
+
+
+nahi hota.
+
+Instead commonly ek session identifier/token hota hai.
+
+Example:
+
+session=8f92a7c1...
+
+
+Server apni side par identify kar sakta hai ki ye token kis session/user se associated hai.
+
+🔥 Cybersecurity mein Cookies kyun important hain?
+
+Because authentication often session cookies ke through maintain hoti hai.
+
+Agar kisi attacker ko valid session cookie mil jaye aur server usse valid maan le, toh session hijacking jaise attacks possible ho sakte hain.
+
+Isliye cookies ke security attributes important hote hain, jaise:
+
+Secure
+HttpOnly
+SameSite
+
+
+Ye next-level web security topics mein bahut important hain.
+
+🧠 Complete Website Request Flow
+
+Jab tum:
+
+https://example.com/login
+
+
+open karte ho, roughly:
+
+1. DNS
+   ↓
+example.com → IP address
+
+2. TCP/TLS connection
+   ↓
+Secure connection establish
+
+3. HTTP Request
+   ↓
+GET /login HTTP/...
+
+4. Web Server
+   ↓
+Request process
+
+5. HTTP Response
+   ↓
+200 OK
+Content-Type: text/html
+
+6. Browser
+   ↓
+HTML render
+
+7. More requests
+   ↓
+CSS / JS / Images
+
+🎯 Final Cheat Sheet
+HTTP
+→ Web communication protocol
+
+HTTPS
+→ HTTP + TLS security
+
+URL
+→ Resource ko locate/access karne ka address
+
+GET
+→ Data lena
+
+POST
+→ Data submit/create karna
+
+PUT
+→ Data update/replace karna
+
+DELETE
+→ Data delete karna
+
+200
+→ Success
+
+301/302
+→ Redirect
+
+400
+→ Bad Request
+
+401
+→ Authentication required/failed
+
+403
+→ Forbidden
+
+404
+→ Not Found
+
+405
+→ Method Not Allowed
+
+500
+→ Server Error
+
+503
+→ Service Unavailable
+
+Header
+→ Extra request/response information
+
+Cookie
+→ Browser-stored data, often used for sessions/authentication
+
+🔥 Ek line mein pura concept:
+
+Browser HTTP/HTTPS request bhejta hai → server request process karta hai → status code + headers + data ke saath response deta hai → cookies sessions ko maintain karne mein help karti hain.
