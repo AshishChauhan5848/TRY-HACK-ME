@@ -1,1 +1,62 @@
 
+Got it. Here’s a quick revision sheet for the CIA Triad room.
+
+CIA Triad
+
+The CIA Triad is the three core principles of cybersecurity:
+
+Principle	Meaning	Main question
+Confidentiality	Only authorized people can access information	Who can see it?
+Integrity	Information cannot be changed without authorization	Has it been changed?
+Availability	Information/services are accessible when needed	Can I access it when needed?
+1. Confidentiality 🔒
+
+Protects information from unauthorized access or disclosure.
+
+Examples:
+
+Someone steals your password → ❌ Confidentiality
+Company documents accessible only to authorized employees → ✅ Confidentiality
+Personal document publicly exposed online → ❌ Confidentiality
+
+Common protections include encryption and access controls.
+
+2. Integrity 🛡️
+
+Ensures information remains accurate and unaltered unless an authorized person changes it.
+
+Examples:
+
+Bank transfer destination changed by an attacker → ❌ Integrity
+Student attendance changed after being locked → ❌ Integrity
+Data changed through authorized approval → ✅ Integrity
+
+Think: "Can I trust that this data hasn't been tampered with?"
+
+3. Availability ⚡
+
+Ensures systems, services, and information are accessible when authorized users need them.
+
+Examples:
+
+Company website goes offline during business hours → ❌ Availability
+Critical services disrupted → ❌ Availability
+Employees can access required systems during working hours → ✅ Availability
+
+Common availability measures include redundancy, backups, load balancing, and protection against DoS attacks.
+
+Easy way to remember
+
+C = Can they see it?
+I = Is it still correct?
+A = Am I able to access it?
+
+Scenario → CIA
+Password leaked → Confidentiality
+Bank account balance altered → Integrity
+Website taken offline → Availability
+Unauthorized person reads a private file → Confidentiality
+Exam grade changed without permission → Integrity
+Server crashes and users can't access it → Availability
+
+Exam tip: An incident can potentially affect more than one pillar, but when a question asks which one is affected most, identify the primary consequence.
