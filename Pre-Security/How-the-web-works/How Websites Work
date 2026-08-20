@@ -1,0 +1,248 @@
+Bilkul — is poore section ko easy Hinglish + TryHackMe exam point of view se samjho.
+
+🌐 Web Application Basics
+
+Jab tum browser me koi website open karte ho, basic process:
+
+Browser → Request → Web Server → Response → Browser
+
+Example:
+
+Chrome → tryhackme.com → Server → HTML/CSS/JS → Chrome
+
+Website ke 2 main parts hote hain:
+
+1. Frontend / Client-Side
+
+Jo cheez user ke browser me run/display hoti hai.
+
+Main technologies:
+
+HTML → structure
+CSS → design/style
+JavaScript → interaction/functionality
+2. Backend / Server-Side
+
+Server par run hone wala part.
+
+Ye:
+
+requests process karta hai
+database se data leta hai
+authentication handle karta hai
+response browser ko bhejta hai
+🏗️ HTML
+
+HTML = HyperText Markup Language
+
+HTML website ka skeleton/structure hai.
+
+Example:
+
+<html>
+<head>
+    <title>My Website</title>
+</head>
+
+<body>
+    <h1>Hello</h1>
+    <p>Welcome!</p>
+</body>
+</html>
+
+Important tags
+Tag	Meaning
+<html>	Complete HTML document
+<head>	Page ki information
+<title>	Browser tab ka title
+<body>	Visible content
+<h1>	Large heading
+<p>	Paragraph
+<button>	Button
+<img>	Image
+Attributes
+
+Tags ke andar extra information dene ke liye attributes use hote hain.
+
+<p class="red">Hello</p>
+
+
+Yahan:
+
+class = attribute
+"red" = value
+id vs class
+<p id="user1">Alice</p>
+<p class="users">Bob</p>
+<p class="users">Jim</p>
+
+
+id normally unique hoti hai.
+
+class multiple elements par use ho sakti hai.
+
+🟨 JavaScript
+
+HTML = structure
+
+CSS = looks
+
+JavaScript = behaviour
+
+Example:
+
+document.getElementById("demo").innerHTML = "Hack the Planet";
+
+
+Ye demo ID wale element ka text change kar dega.
+
+JavaScript user interaction bhi handle kar sakti hai:
+
+<button onclick="alert('Hello')">Click Me</button>
+
+
+Button click karne par JavaScript execute hogi.
+
+🔓 Sensitive Data Exposure
+
+Ye cybersecurity ke liye bahut important hai.
+
+Kabhi-kabhi developer galti se sensitive information frontend source code me chhod deta hai.
+
+Example:
+
+<!-- Temporary password: admin123 -->
+
+
+Ya:
+
+username = "admin";
+password = "secret123";
+
+
+Ya hidden page:
+
+<a href="/admin-panel">Admin</a>
+
+
+Browser ko jo HTML/JS milta hai, user uska source dekh sakta hai.
+
+Isliye:
+
+Website assess karte waqt:
+
+Right Click → View Page Source
+
+check karna useful hai.
+
+⚠️ Important: "hidden" HTML ka matlab secure nahi hota. Agar browser ko data bheja gaya hai, user potentially usse inspect kar sakta hai.
+
+💉 HTML Injection
+
+Ab actual vulnerability.
+
+Simple definition:
+
+HTML Injection tab hota hai jab user ka input properly filter/sanitize nahi kiya jata aur directly webpage me HTML ke form me render ho jata hai.
+
+Suppose website me form hai:
+
+What's your name?
+[ Alice             ]
+
+
+Website output karti hai:
+
+Hello Alice
+
+
+Normal hai.
+
+Lekin attacker input kare:
+
+<h1>Hello</h1>
+
+
+Agar website input ko sanitize nahi karti, browser ise text ki tarah nahi, HTML ki tarah interpret kar sakta hai.
+
+Result:
+
+Hello
+
+Matlab attacker webpage ka appearance/control manipulate kar sakta hai.
+
+🧼 Input Sanitisation
+
+Sanitisation = user ke input ko clean/filter karna before using it.
+
+Example:
+
+User input:
+
+<h1>Hello</h1>
+
+
+Application usse safe text me convert kare:
+
+<h1>Hello</h1>
+
+
+Instead of actually rendering it as a heading.
+
+Golden Rule 🔥
+
+Never trust user input.
+
+User jo bhi input de raha hai, usse automatically trustworthy nahi maan sakte.
+
+🧠 HTML Injection vs JavaScript
+
+HTML Injection ka impact sirf HTML tak limited nahi ho sakta.
+
+Agar application dangerous user-controlled content ko page me inject hone de, JavaScript execution bhi possible ho sakti hai, depending on how the application handles the input.
+
+Isliye:
+
+Unsanitised input → HTML injection → potentially script injection/XSS
+
+Lekin terminology yaad rakho:
+
+HTML Injection → HTML inject karna
+XSS (Cross-Site Scripting) → browser me attacker-controlled JavaScript execute karwana
+🎯 TryHackMe ke liye Quick Revision
+Website basics
+
+HTML → structure
+CSS → styling
+JavaScript → functionality/interactivity
+
+Website architecture
+
+Frontend → browser/client side
+
+Backend → server side
+
+Security
+
+Sensitive Data Exposure → source code/frontend me sensitive information accidentally exposed.
+
+HTML Injection → unsanitised user input webpage ke HTML ke roop me render ho raha hai.
+
+Input Sanitisation → user input ko clean/filter karna.
+
+🧩 Ek simple real-world analogy
+
+Restaurant imagine karo:
+
+HTML = restaurant ka structure 🍽️
+CSS = decoration 🎨
+JavaScript = waiter ka behaviour 🤵
+Backend = kitchen 👨‍🍳
+Browser = customer
+Request = customer ka order
+Response = kitchen se aaya food
+Input sanitisation = kitchen order ko verify karna
+HTML Injection = customer order slip me aisa kuch likh de jo staff bina check kiye instructions samajh le
+Sabse important line:
+
+User input ko directly page par HTML ke form me render karna dangerous hai. Input ko sanitize/validate karna chahiye.
