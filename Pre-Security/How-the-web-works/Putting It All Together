@@ -1,0 +1,523 @@
+Bilkul. Is section ko Hinglish + simple examples + TryHackMe ke important points ke saath samjho.
+
+🌐 Putting It All Together
+
+Jab tum browser me example.com open karte ho, behind the scenes roughly ye hota hai:
+
+Tumhara Browser
+      ↓
+DNS → Domain ka IP address find karta hai
+      ↓
+Web Server
+      ↓
+HTTP/HTTPS Request
+      ↓
+Server processing
+      ↓
+HTML + CSS + JS + Images
+      ↓
+Browser website display karta hai
+
+
+Ab is process ko powerful banane ke liye kuch extra components use hote hain:
+
+Load Balancer
+CDN
+Database
+WAF
+Web Server
+Virtual Hosts
+Backend
+⚖️ 1. Load Balancer
+
+Suppose ek website par bahut zyada users aa gaye.
+
+Agar sirf ek server hai:
+
+100,000 Users
+      ↓
+   Server
+
+
+Server overload ho sakta hai.
+
+Instead multiple servers:
+
+              ┌── Server 1
+Users → Load ├── Server 2
+              └── Server 3
+
+
+Load Balancer incoming requests ko different servers ke beech distribute karta hai.
+
+Main benefits
+1. Traffic distribution
+
+Request ko different servers par distribute karta hai.
+
+2. Failover
+
+Agar Server 2 down hai:
+
+Request → Load Balancer → Server 1 / Server 3
+
+
+Load balancer Server 2 ko request bhejna temporarily stop kar dega.
+
+🔄 Round Robin
+
+Example:
+
+Request 1 → Server 1
+Request 2 → Server 2
+Request 3 → Server 3
+Request 4 → Server 1
+Request 5 → Server 2
+
+
+Turn-by-turn distribution.
+
+⚖️ Weighted
+
+Servers ki capacity different ho sakti hai.
+
+Example:
+
+Server 1 → powerful
+Server 2 → medium
+Server 3 → weak
+
+
+Load balancer powerful server ko comparatively zyada traffic de sakta hai.
+
+❤️ Health Check
+
+Load balancer periodically check karta hai:
+
+"Server alive hai?"
+
+Agar server response nahi karta → traffic us server ko nahi bhejega.
+
+🌍 2. CDN
+
+CDN = Content Delivery Network
+
+CDN ka purpose mainly static files ko users ke closer rakhna hai.
+
+Static files:
+
+Images
+CSS
+JavaScript
+Videos
+etc.
+
+Without CDN:
+
+India User
+    ↓
+Website Server → USA
+
+
+Data ko long distance travel karna padega.
+
+CDN ke saath:
+
+India User
+    ↓
+Nearby CDN Server
+    ↓
+Image/CSS/JS
+
+
+Result:
+
+✅ Faster loading
+✅ Original server par less traffic
+✅ Better performance globally
+
+Easy analogy
+
+Imagine ek restaurant ka main kitchen USA me hai.
+
+Agar India ke har customer ka food USA se aaye → slow.
+
+CDN = different cities me small kitchens/food warehouses bana dena.
+
+🗄️ 3. Database
+
+Website ko information store karni hoti hai.
+
+For example:
+
+Username
+Password
+Email
+Posts
+Comments
+Orders
+
+
+Ye information database me store ho sakti hai.
+
+Common databases:
+
+MySQL
+MSSQL
+MongoDB
+PostgreSQL
+
+Basic architecture:
+
+User
+ ↓
+Web Server
+ ↓
+Backend
+ ↓
+Database
+
+
+Example:
+
+Tum login karte ho:
+
+Username: alice
+Password: ********
+
+
+Backend database se check karega:
+
+Kya Alice ka account exist karta hai aur credentials correct hain?
+
+Then response:
+
+Correct → Login successful
+Wrong   → Login failed
+
+🛡️ 4. WAF
+
+WAF = Web Application Firewall
+
+WAF website ke front gate security guard jaisa hai.
+
+Architecture:
+
+User
+ ↓
+WAF
+ ↓
+Web Server
+ ↓
+Backend
+
+
+WAF incoming HTTP requests inspect karta hai.
+
+Agar request suspicious lage:
+
+Attacker → WAF → ❌ BLOCK
+
+
+Normal request:
+
+User → WAF → ✅ Web Server
+
+
+WAF common attack patterns detect karne ki koshish kar sakta hai.
+
+Rate Limiting
+
+WAF ye bhi check kar sakta hai ki koi IP bahut zyada requests to nahi bhej raha.
+
+Example:
+
+Normal:
+10 requests/sec → ✅
+
+Suspicious:
+10,000 requests/sec → 🚫
+
+
+Ye excessive traffic/DoS-type situations ko mitigate karne me help kar sakta hai.
+
+🖥️ 5. Web Server
+
+Web server = software jo incoming web requests receive karta hai aur web content return karta hai.
+
+Common examples:
+
+Apache
+Nginx
+Node.js-based servers
+
+Basic flow:
+
+Browser
+   ↓
+HTTP Request
+   ↓
+Web Server
+   ↓
+Requested file/content
+   ↓
+HTTP Response
+
+📁 Web Root Directory
+
+Web server ke paas ek directory hoti hai jahan se files serve hoti hain.
+
+Example:
+
+/var/www/html/
+
+
+Agar browser request kare:
+
+http://example.com/picture.jpg
+
+
+Server internally file dhundh sakta hai:
+
+/var/www/html/picture.jpg
+
+
+Aur us file ko browser ko return karega.
+
+🏠 6. Virtual Hosts
+
+Ek hi web server par multiple websites host kar sakte ho.
+
+Example:
+
+                 Web Server
+               /     |      \
+              /      |       \
+        one.com   two.com   three.com
+
+
+Browser request me hostname aata hai:
+
+Host: one.com
+
+
+Web server check karta hai:
+
+one.com ke liye kaunsa website configuration hai?
+
+Then correct website serve karta hai.
+
+Example:
+
+one.com
+   ↓
+/var/www/website_one
+
+two.com
+   ↓
+/var/www/website_two
+
+Important
+
+One physical server → multiple websites
+
+Ye possible hai because of Virtual Hosts.
+
+📄 Static vs Dynamic Content
+
+Ye bahut important distinction hai.
+
+🟢 Static Content
+
+Jo content normally same rehta hai.
+
+Examples:
+
+Images
+CSS
+JavaScript files
+Fixed HTML
+
+Example:
+
+/logo.png
+/style.css
+/script.js
+
+
+Server directly file serve kar sakta hai.
+
+Browser → Server → File
+
+🔵 Dynamic Content
+
+Jo request/user/data ke according change ho sakta hai.
+
+Example:
+
+Blog
+
+Aaj:
+
+Latest Post:
+"Networking Basics"
+
+
+Kal new post add hua:
+
+Latest Post:
+"Web Security"
+
+
+Homepage automatically different content show karegi.
+
+Another example:
+
+Search: cats
+
+
+Result:
+
+10 cat-related results
+
+
+Search:
+
+Search: dogs
+
+
+Result:
+
+15 dog-related results
+
+
+Ye dynamic content hai.
+
+🧠 Frontend vs Backend
+
+Simple trick:
+
+Frontend
+
+Jo tum dekh sakte ho.
+
+HTML
+CSS
+JavaScript
+
+
+Browser me execute/render hota hai.
+
+Backend
+
+Jo server ke peeche hota hai.
+
+Backend:
+
+data process karta hai
+database se communicate karta hai
+login handle karta hai
+calculations karta hai
+response generate karta hai
+
+User generally backend ka actual source code nahi dekhta.
+
+🐘 Backend Languages
+
+Examples:
+
+PHP
+Python
+Ruby
+Node.js
+Perl
+
+Ye backend languages databases aur external services ke saath interact kar sakti hain.
+
+🧪 PHP Example
+
+Suppose URL hai:
+
+example.com/index.php?name=adam
+
+
+Backend PHP code:
+
+<html>
+<body>
+Hello <?php echo $_GET["name"]; ?>
+</body>
+</html>
+
+
+Yahan:
+
+?name=adam
+
+
+means name ki value = adam.
+
+Backend PHP execute karega aur output banega:
+
+<html>
+<body>
+Hello adam
+</body>
+</html>
+
+
+Browser ko PHP code nahi milta.
+
+Browser ko sirf final HTML milti hai:
+
+Server-side PHP
+      ↓
+Processing
+      ↓
+Final HTML
+      ↓
+Browser
+
+🔥 Cybersecurity point
+
+Backend user input process karta hai, isliye agar developer input ko properly validate/sanitize nahi karta, to vulnerabilities arise ho sakti hain.
+
+🎯 Exam/CTF Quick Revision
+Term	Simple Meaning
+Load Balancer	Traffic ko multiple servers me distribute karta hai
+Health Check	Server alive/healthy hai ya nahi check karta hai
+CDN	Static content users ke closer serve karta hai
+Database	Data store karta hai
+WAF	Malicious/suspicious web requests ko block/filter karta hai
+Web Server	Web requests receive karke content serve karta hai
+Virtual Host	Ek server par multiple websites host karna
+Static Content	Content jo normally change nahi hota
+Dynamic Content	Request/data ke according change hota hai
+Frontend	Browser me visible/rendered part
+Backend	Server-side processing
+PHP/Python/etc.	Backend languages
+🧠 Ek line me poora architecture
+User
+ ↓
+DNS → IP find
+ ↓
+WAF → Security check
+ ↓
+Load Balancer → Server choose
+ ↓
+Web Server
+ ↓
+Backend
+ ↓
+Database
+ ↓
+Response
+ ↓
+Browser
+
+
+Aur CDN mostly static files ko user ke nearest location se quickly deliver karne me help karta hai.
+
+Sabse important mental model:
+
+Frontend jo dikhta hai, Backend jo process karta hai, Database jo store karta hai, WAF jo protect karta hai, Load Balancer jo traffic distribute karta hai, aur CDN jo static content ko fast deliver karta hai.
