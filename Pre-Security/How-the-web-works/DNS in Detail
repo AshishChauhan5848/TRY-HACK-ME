@@ -1,1 +1,525 @@
 
+Bilkul 👍 Is topic ko DNS (Domain Name System) kehte hain. Isko simple Hinglish mein samjho.
+
+🌐 DNS kya hai?
+
+DNS ka full form hai:
+
+Domain Name System
+
+DNS ka main kaam hai domain name ko IP address mein translate karna.
+
+Example:
+
+tryhackme.com
+      ↓
+104.26.10.229
+
+
+Humare liye tryhackme.com yaad rakhna easy hai, lekin computer/network communication ke liye IP address important hota hai.
+
+🏠 Easy analogy
+
+Socho tumhe kisi friend ke ghar jaana hai.
+
+Tum friend ka naam jaante ho:
+
+"Rahul"
+
+Lekin delivery/postman ko actual address chahiye.
+
+DNS bhi roughly wahi karta hai:
+
+Domain Name = Naam
+IP Address  = Address
+DNS         = Naam → Address lookup service
+
+🌳 Domain Hierarchy
+
+Domain name ko right se left read karna useful hai.
+
+Example:
+
+www.tryhackme.com
+│   │         │
+│   │         └── TLD
+│   └──────────── Second-Level Domain
+└──────────────── Subdomain
+
+
+Ab ek-ek karke:
+
+1. TLD — Top-Level Domain
+
+Domain ka sabse right wala part.
+
+Example:
+
+tryhackme.com
+          ↑
+         TLD
+
+
+Yahan .com TLD hai.
+
+Examples:
+
+.com
+.org
+.edu
+.gov
+.uk
+.in
+
+gTLD
+
+Generic Top-Level Domain:
+
+.com
+.org
+.edu
+.gov
+
+
+Historically inka purpose indicate karna tha ki domain kis type ka hai.
+
+ccTLD
+
+Country Code TLD:
+
+.in → India
+.uk → United Kingdom
+.ca → Canada
+
+2. Second-Level Domain
+
+Example:
+
+tryhackme.com
+^^^^^^^^^
+   SLD
+
+
+Yahan:
+
+.com = TLD
+tryhackme = Second-Level Domain
+
+Ye basically domain ka main registered name hota hai.
+
+3. Subdomain
+
+Example:
+
+admin.tryhackme.com
+^^^^^
+Subdomain
+
+
+Yahan:
+
+admin = Subdomain
+tryhackme = Second-Level Domain
+.com = TLD
+
+
+Aur multiple subdomains bhi ho sakte hain:
+
+jupiter.servers.tryhackme.com
+^^^^^^^
+Subdomain
+
+🧠 Full breakdown
+admin.tryhackme.com
+  │       │       │
+  │       │       └── TLD
+  │       └────────── Second-Level Domain
+  └────────────────── Subdomain
+
+📋 DNS Record Types
+
+DNS sirf domain → IPv4 nahi karta.
+
+Different information ke liye different DNS records hote hain.
+
+A Record
+
+A = IPv4 address
+
+example.com
+    ↓
+104.26.10.229
+
+
+So:
+
+A → IPv4
+
+AAAA Record
+
+AAAA = IPv6 address
+
+Example:
+
+example.com
+     ↓
+2606:4700:20::681a:be5
+
+
+So:
+
+AAAA → IPv6
+
+Yaad rakhne ka trick:
+A    → IPv4
+AAAA → IPv6
+
+🔗 CNAME Record
+
+CNAME ka matlab hai:
+
+Canonical Name
+
+Ye directly IP address dene ke bajay another domain name par point karta hai.
+
+Example:
+
+store.tryhackme.com
+        ↓
+shops.shopify.com
+        ↓
+      IP Address
+
+
+Matlab DNS ko ek extra lookup karna pad sakta hai.
+
+Shortcut:
+
+CNAME → Domain ka alias
+
+📧 MX Record
+
+MX = Mail Exchange
+
+Ye batata hai ki domain ki email handle karne wali mail server kaunsi hai.
+
+Example:
+
+tryhackme.com
+      ↓
+MX
+      ↓
+mail server
+
+
+MX records ke saath priority bhi hoti hai.
+
+Example:
+
+Priority 10 → Mail Server A
+Priority 20 → Mail Server B
+
+
+Generally lower priority number ko preference milti hai.
+
+Agar primary mail server unavailable ho, backup server use ho sakta hai.
+
+Shortcut:
+
+MX → Email server
+
+📝 TXT Record
+
+TXT record basically domain ke saath text-based information store karne ke liye hota hai.
+
+Iske multiple uses hain.
+
+For example:
+
+Email security
+
+SPF/DKIM/DMARC related information publish karne ke liye use ho sakta hai.
+
+Domain verification
+
+Kisi third-party service ko prove karna ki:
+
+"Haan, ye domain mere control mein hai."
+
+Example:
+
+example.com
+TXT
+"verification-token"
+
+Shortcut:
+
+TXT → Extra text/information
+
+🚀 DNS Request ka actual process
+
+Ab sabse important part.
+
+Suppose tum browser mein type karte ho:
+
+www.tryhackme.com
+
+
+Computer ko IP chahiye.
+
+Process roughly:
+
+Your Computer
+      ↓
+Local DNS Cache
+      ↓
+Recursive DNS Server
+      ↓
+Root DNS Server
+      ↓
+.com TLD Server
+      ↓
+Authoritative DNS Server
+      ↓
+IP Address
+
+
+Let's break it down.
+
+1️⃣ Local Cache
+
+Sabse pehle tumhara computer check karta hai:
+
+"Kya mujhe is domain ka IP already pata hai?"
+
+Agar cache mein answer mil gaya:
+
+tryhackme.com
+     ↓
+104.26.10.229
+
+
+Toh request yahin finish.
+
+No need for further DNS lookup.
+
+2️⃣ Recursive DNS Server
+
+Agar local cache mein answer nahi hai, request Recursive DNS Server ko jaati hai.
+
+Usually ye ISP provide karta hai, but tum different DNS resolver bhi configure kar sakte ho.
+
+Recursive server bhi apna cache maintain karta hai.
+
+Agar uske paas answer hai:
+
+Recursive DNS
+     ↓
+IP Address
+
+
+Done.
+
+Agar nahi hai, toh woh DNS hierarchy ko query karega.
+
+3️⃣ Root DNS Server 🌳
+
+Agar recursive server ko answer nahi mila, woh Root DNS Server se poochta hai.
+
+Root server ka role basically:
+
+"Tum .com domain ke baare mein pooch rahe ho? Toh .com TLD server ke paas jao."
+
+Example:
+
+www.tryhackme.com
+       ↓
+Root
+       ↓
+.com TLD Server
+
+
+Root server usually final IP answer nahi deta.
+
+4️⃣ TLD Server
+
+Ab request .com TLD server ke paas jaati hai.
+
+TLD server kehta hai roughly:
+
+"tryhackme.com ka authoritative nameserver ye hai."
+
+For example:
+
+.com TLD
+    ↓
+Authoritative DNS Server
+
+5️⃣ Authoritative DNS Server
+
+Ye sabse important DNS server hai for that domain.
+
+Authoritative server ke paas actual DNS records stored hote hain.
+
+Example:
+
+tryhackme.com
+      ↓
+A Record
+      ↓
+104.26.10.229
+
+
+Ye answer Recursive DNS Server ko return karta hai.
+
+6️⃣ Answer tumhare computer tak
+
+Final flow:
+
+Authoritative DNS
+       ↓
+Recursive DNS
+       ↓
+Your Computer
+       ↓
+104.26.10.229
+       ↓
+Website connection
+
+
+Phir browser IP address use karke website se connect karta hai.
+
+⏱️ TTL — Time To Live
+
+DNS records ke saath TTL value hoti hai.
+
+TTL batati hai:
+
+"Is DNS answer ko kitni der cache mein rakhna hai?"
+
+Example:
+
+TTL = 3600 seconds
+
+
+Matlab roughly:
+
+3600 sec = 1 hour
+
+
+Cache 1 hour tak answer reuse kar sakta hai, depending on DNS behaviour.
+
+Caching kyun useful hai?
+
+Agar har baar complete DNS journey karni pade:
+
+Computer
+ ↓
+Recursive
+ ↓
+Root
+ ↓
+TLD
+ ↓
+Authoritative
+
+
+toh unnecessary traffic aur delay hoga.
+
+Caching se:
+
+Computer
+ ↓
+Cache
+ ↓
+IP
+
+
+kaafi fast ho sakta hai.
+
+🧠 Ek complete example
+
+Tum type karte ho:
+
+www.example.com
+
+Step 1
+
+Computer cache check:
+
+❌ Not found
+
+Step 2
+
+Recursive DNS:
+
+❌ Not cached
+
+Step 3
+
+Root:
+
+.com → TLD server
+
+Step 4
+
+TLD:
+
+example.com → Authoritative DNS
+
+Step 5
+
+Authoritative server:
+
+A record
+↓
+93.x.x.x
+
+Step 6
+
+Answer wapas:
+
+Authoritative
+     ↓
+Recursive
+     ↓
+Computer
+     ↓
+Browser
+
+🔥 Exam/CTF ke liye Cheat Sheet
+Record	Meaning	Points to
+A	Address	IPv4
+AAAA	IPv6 Address	IPv6
+CNAME	Alias	Another domain
+MX	Mail Exchange	Mail server
+TXT	Text information	Text-based data
+DNS hierarchy:
+Root
+ ↓
+TLD (.com)
+ ↓
+Second-Level Domain (tryhackme)
+ ↓
+Subdomain (www)
+
+DNS lookup:
+Your PC
+ ↓
+Local Cache
+ ↓
+Recursive DNS
+ ↓
+Root
+ ↓
+TLD
+ ↓
+Authoritative DNS
+ ↓
+IP
+
+Sabse important line:
+
+DNS ka primary purpose human-friendly domain names ko network addresses (jaise IP addresses) se resolve karna hai.
+
+Aur ek important distinction: DNS website ko download nahi karta — DNS pehle naam ka address resolve karta hai; uske baad browser us IP par actual network connection establish karta hai.
