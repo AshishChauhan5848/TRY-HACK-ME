@@ -1,0 +1,254 @@
+Absolutely — this room is about Cryptography, and it builds directly on the CIA Triad.
+
+🔐 Cryptography — Quick Revision Sheet
+What is cryptography?
+
+Cryptography uses mathematical algorithms and keys to protect information.
+
+It primarily helps with:
+
+Confidentiality → preventing unauthorized people from reading data.
+Integrity → helping detect/prevent unauthorized modification.
+
+A simple model is:
+
+Plaintext + Algorithm + Key → Ciphertext
+
+and:
+
+Ciphertext + Key → Plaintext
+
+1. Plaintext vs Ciphertext
+Term	Meaning	Example
+Plaintext	Readable original data	HELLO
+Ciphertext	Scrambled/encrypted data	KHOOR
+Key	Secret value controlling encryption/decryption	3
+Algorithm	The rules used to encrypt/decrypt	Caesar cipher
+Important concept
+
+The algorithm does not need to be secret.
+
+The key must be kept secret.
+
+This is a fundamental principle of modern cryptography.
+
+2. Symmetric Encryption 🔑
+
+Symmetric encryption uses one shared secret key.
+
+Alice
+Plaintext
+   ↓
+[ Encryption + Secret Key ]
+   ↓
+Ciphertext
+   ↓
+[ Decryption + Same Secret Key ]
+   ↓
+Bob
+Plaintext
+
+Example
+
+With a Caesar cipher using key 3:
+
+HELLO → KHOOR
+
+
+Bob uses the same key in reverse:
+
+KHOOR → HELLO
+
+Advantages
+Very fast
+Efficient for large amounts of data
+Good for files, disks, and network traffic
+Main problem
+
+Key distribution problem
+
+Alice and Bob need the same secret key. But how can Alice safely give Bob that key if an attacker is monitoring their communication?
+
+That's where asymmetric encryption comes in.
+
+3. Asymmetric Encryption 🔐
+
+Asymmetric encryption uses two mathematically related keys:
+
+Public key
+Can be shared with everyone.
+Used to encrypt information intended for the owner.
+Private key
+Must remain secret.
+Used to decrypt information encrypted with the corresponding public key.
+Alice
+   |
+   | Encrypt with Bob's PUBLIC key
+   ↓
+Ciphertext
+   |
+   ↓
+Bob
+   |
+   | Decrypt with Bob's PRIVATE key
+   ↓
+Plaintext
+
+Easy analogy: mailbox 📮
+
+Think of Bob's public key as a mail slot.
+
+Anyone can put a letter into it.
+
+Bob's private key is the key that opens the mailbox.
+
+So:
+
+Public key = anyone can use it
+Private key = owner keeps it secret
+
+4. Symmetric vs Asymmetric
+	Symmetric	Asymmetric
+Keys	One shared key	Public + private key
+Speed	Fast	Slower
+Key sharing	Difficult	Much easier
+Best for	Large amounts of data	Key exchange, authentication
+Example analogy	Lockbox	Mailbox
+Remember:
+
+Symmetric = Same key
+
+Asymmetric = A pair of keys
+
+5. How HTTPS Uses Both
+
+This is the important part behind the 🔒 padlock.
+
+HTTPS doesn't simply use asymmetric encryption for everything because asymmetric encryption is relatively slow.
+
+Instead, modern secure connections use a hybrid approach.
+
+Simplified:
+
+1. Browser → Server
+   "I want to connect securely."
+
+2. Server → Browser
+   Certificate + public-key information
+
+3. Browser verifies the certificate.
+
+4. Asymmetric cryptography
+   establishes/agrees on a shared secret.
+
+5. Both sides now have a symmetric session key.
+
+6. Symmetric encryption
+   protects the actual data exchanged.
+
+
+So:
+
+Asymmetric encryption → securely establish the session
+
+Symmetric encryption → efficiently protect the session data
+
+That's why HTTPS can be both secure and fast.
+
+6. Certificates and Certificate Authorities
+
+There's an important problem:
+
+How does your browser know that a public key actually belongs to example.com?
+
+An attacker could create a fake website and give you their public key.
+
+That's where digital certificates come in.
+
+A certificate essentially associates:
+
+Website identity
+       +
+Public key
+       +
+Certificate Authority signature
+
+
+A Certificate Authority (CA) is a trusted organization that digitally signs certificates.
+
+Your browser/OS has a collection of trusted CA certificates.
+
+When connecting to an HTTPS website, the browser checks things such as:
+
+Is the certificate issued for the correct domain?
+Is it signed by a trusted CA?
+Is it still valid?
+Has it been revoked?
+
+If the checks fail, your browser can show a security warning.
+
+7. The Caesar Cipher
+
+The Caesar cipher is a simple example of symmetric encryption.
+
+With a key of 3:
+
+A → D
+B → E
+C → F
+...
+X → A
+Y → B
+Z → C
+
+
+Therefore:
+
+HELLO
+ ↓ key = 3
+KHOOR
+
+
+To decrypt:
+
+KHOOR
+ ↓ key = -3
+HELLO
+
+Why isn't Caesar cipher secure?
+
+There are only 25 useful shifts, so an attacker can simply try every possibility.
+
+It's useful for learning cryptography but not for protecting real information.
+
+Modern encryption algorithms, such as AES, are vastly more sophisticated.
+
+🧠 Key points to memorize
+The four basic terms
+
+Plaintext → readable data
+Ciphertext → encrypted/scrambled data
+Key → secret value controlling encryption
+Algorithm → mathematical procedure used for encryption/decryption
+
+Symmetric
+
+One key → fast → bulk data
+
+Asymmetric
+
+Public + private keys → slower → key exchange/authentication
+
+HTTPS
+
+Asymmetric first → symmetric afterward
+
+Certificate
+
+Binds a website's identity to its public key and is signed by a trusted CA.
+
+⭐ The answer to the opening question
+
+When you see the padlock in your browser, TLS/HTTPS cryptography protects the connection. It uses certificates and asymmetric cryptography during connection establishment, then uses efficient symmetric encryption for the actual communication.
+
+So an attacker monitoring the network should see ciphertext rather than your readable passwords, messages, or other HTTPS data.
