@@ -1,0 +1,92 @@
+Got it. This room is essentially your first practical introduction to offensive security / ethical hacking. Here’s the key knowledge you should retain for questions and future rooms.
+
+🔴 Offensive Security
+
+Offensive security means proactively attacking or testing systems with explicit permission to find vulnerabilities before real attackers do.
+
+The important mindset is:
+
+Find weaknesses → demonstrate their impact → report/fix them.
+
+It is not about randomly attacking systems. The testing must have a defined scope and authorization.
+
+🧠 Key terminology
+Term	Meaning
+Vulnerability	A weakness or flaw that could be abused
+Exploit	A technique that takes advantage of a vulnerability
+Scope	What you're explicitly allowed to test
+Enumeration	Gathering information about a target
+Credentials	Username/password or other authentication information
+Authentication	Verifying who someone is
+Penetration test	Authorized testing intended to identify and demonstrate vulnerabilities
+Red teaming	Simulating a realistic adversary against an organization
+Dictionary attack	Trying passwords from a predefined wordlist
+🔍 The practical attack chain
+
+The exercise demonstrates a very common security concept: small weaknesses can be chained together.
+
+For example:
+
+Hidden page → login page → weak password → valid credentials → privileged access
+
+Individually, a hidden page might not seem particularly dangerous. Combined with weak authentication, however, it can lead to unauthorized access.
+
+🛠️ Tools introduced
+
+Gobuster
+
+Used for discovering hidden directories/files on a web server.
+
+gobuster dir --url http://www.onlineshop.thm/ -w /usr/share/wordlists/dirbuster/directory-list.txt
+
+
+Think:
+
+Gobuster = content discovery / enumeration
+
+Hydra
+
+Used to automate password attempts against supported authentication services.
+
+In the TryHackMe exercise, it performs a dictionary attack against the login form.
+
+Think:
+
+Hydra = automated credential/password testing
+
+🎯 Hacker mindset
+
+When assessing an application, don't only ask:
+
+"Does this feature work?"
+
+Also ask:
+
+What happens if I give it unexpected input?
+What functionality isn't supposed to be publicly accessible?
+Are there hidden pages?
+Are credentials weak?
+Can two seemingly minor weaknesses be chained?
+What can I access after authentication?
+Can authenticated access expose another vulnerability?
+⚠️ Most important rule
+
+Authorization comes first.
+
+Only perform penetration testing, enumeration, password testing, or exploitation against systems you own or have explicit permission to test.
+
+📝 One-line revision notes
+Offensive security: Find weaknesses by safely simulating attacks.
+Vulnerability: Weakness.
+Exploit: Method used to abuse a weakness.
+Enumeration: Discovering information about a target.
+Scope: What you're allowed to test.
+Gobuster: Finds hidden web directories/files.
+Hydra: Automates login/password testing.
+Dictionary attack: Tries passwords from a wordlist.
+Authentication: Verifies identity.
+Red team: Simulates a real adversary.
+Penetration test: Authorized security assessment.
+Chaining: Combining multiple weaknesses to produce greater impact.
+
+This completes the conceptual progression from Pre Security → CIA Triad → Cryptography → Offensive Security.
