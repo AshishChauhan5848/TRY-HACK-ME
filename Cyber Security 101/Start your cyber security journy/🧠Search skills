@@ -1,0 +1,719 @@
+🧠 1. Search Skills ka actual meaning
+
+Suppose tumhe kisi server ke baare mein investigate karna hai.
+
+Tumhare paas ho sakta hai:
+
+IP address
+Domain
+Hostname
+Software name
+Software version
+File hash
+CVE number
+Suspicious file
+Username
+Threat actor
+
+Ab question hai:
+
+“Is information ko search kahan karun?”
+
+Yahi Search Skills hai.
+
+Cybersecurity mein common resources:
+
+Shodan
+VirusTotal
+CVE databases
+ExploitDB
+Official Documentation
+Man pages
+GitHub
+
+Har website ka apna purpose hai.
+
+🌐 2. Shodan — Internet ka Search Engine
+6
+
+Sabse pehle Shodan.
+
+Normal Google kya search karta hai?
+
+Web pages
+Articles
+Images
+Videos
+Documents
+
+Shodan ka focus different hai.
+
+Shodan kya karta hai?
+
+Shodan internet par publicly reachable devices/services ko continuously scan/index karta hai.
+
+For example:
+
+Web servers
+Routers
+Cameras
+VPN gateways
+Industrial systems
+Databases
+IoT devices
+
+So tum roughly ye dekh sakte ho:
+
+IP
+   ↓
+Port
+   ↓
+Service
+   ↓
+Software
+   ↓
+Version
+Example
+
+Suppose Shodan mein tum search karte ho:
+
+apache 2.4.1
+
+Shodan un internet-facing systems ko dhoondh sakta hai jo apne response/banner mein Apache 2.4.1 advertise kar rahe hain.
+
+Iska security use kya hai?
+
+Suppose:
+
+Apache 2.4.1
+       ↓
+Known vulnerability
+       ↓
+CVE
+       ↓
+Security assessment
+
+To security researcher ko idea mil sakta hai ki kis type ke systems potentially affected ho sakte hain.
+
+⚠️ Lekin important distinction:
+
+Shodan result milna ≠ system hack karne ki permission.
+
+Publicly visible hone ka matlab publicly attackable/authorized nahi hota.
+
+🔎 3. Shodan Filters
+
+Ye part important hai.
+
+Shodan ke paas search filters hain.
+
+country
+
+Country restrict karne ke liye:
+
+country:IE
+
+Matlab Ireland ke results.
+
+port
+
+Specific port search karna:
+
+port:22
+
+Yaani SSH-related exposed services.
+
+Port:
+
+80
+443
+22
+3389
+
+etc.
+
+org
+
+Kisi organisation/ASN ke scope mein search.
+
+Example:
+
+AS7224
+
+ASN basically ek network/organisation ke IP ranges ka identifier samajh lo.
+
+Simple analogy:
+
+ASN = Internet par organisation ka network-area identifier.
+
+hostname
+
+Specific hostname/domain ke liye:
+
+hostname:example.com
+
+Ye useful hai jab tum authorized organisation/domain ke internet-facing assets investigate kar rahe ho.
+
+🦠 4. VirusTotal
+5
+
+Ab aao VirusTotal par.
+
+VirusTotal ko simple language mein samjho:
+
+“Ek jagah par multiple security engines se suspicious file/URL/domain ko check karna.”
+
+Suppose tumhare paas file hai:
+
+invoice_payment.exe
+
+Tumhe doubt hai:
+
+“Bhai ye genuine invoice software hai ya malware?”
+
+VirusTotal mein file/hash/URL/domain etc. ke basis par information mil sakti hai.
+
+Multiple security vendors apna verdict dete hain.
+
+Example conceptual result:
+
+Vendor A     → Malicious
+Vendor B     → Malicious
+Vendor C     → Clean
+Vendor D     → Malicious
+Vendor E     → Clean
+
+Agar:
+
+70 engines
+↓
+45 detect
+↓
+25 don't detect
+
+to iska matlab:
+
+45 security vendors ne suspicious/malicious identify kiya.
+
+But ek important lesson:
+
+❌ VirusTotal = 100% truth
+
+Nahi.
+
+A detection consensus useful evidence hai, final proof nahi.
+
+False positives ho sakte hain.
+
+🧪 5. TryHackMe ka VirusTotal Practical
+
+Tumhare room mein practical diya hai:
+
+invoice_payment.exe
+
+Tumhe TryHackMe ke simulated VirusTotal/TryDetectMe environment mein search karna hai.
+
+Steps ka meaning:
+
+Step 1
+
+Search:
+
+invoice_payment.exe
+Step 2
+
+Security vendors ka result dekho.
+
+Step 3
+
+Count karo:
+
+Kitne vendors ne dangerous/malicious identify kiya?
+
+Bas wahi answer room mein submit karna hai.
+
+Ye practical real VirusTotal par nahi, TryHackMe simulation mein hai.
+
+🛡️ 6. CVE — Vulnerability ka Universal ID
+
+Ab cybersecurity ka bahut important concept.
+
+CVE = Common Vulnerabilities and Exposures
+
+Simple language:
+
+CVE ek known security vulnerability ko diya gaya unique identification number hai.
+
+Example:
+
+CVE-2025-55182
+
+Isko parts mein dekho:
+
+CVE
+│
+├── 2025  → year
+│
+└── 55182 → vulnerability identifier
+
+Matlab jab security industry mein log us vulnerability ki baat karenge, sabko pata rahega ki exactly kaunsi vulnerability ki baat ho rahi hai.
+
+🎯 CVE ki zarurat kyun?
+
+Suppose ek researcher bolta hai:
+
+“Apache mein ek serious remote vulnerability hai.”
+
+Vendor A usko kuch naam deta hai.
+
+Researcher B kuch aur naam deta hai.
+
+Security tool kuch aur naam use karta hai.
+
+Confusion. 😵‍💫
+
+CVE ek common identifier provide karta hai:
+
+CVE-202X-XXXXX
+
+Ab everyone same vulnerability ko refer kar sakta hai.
+
+🔥 7. CVE vs CVSS
+
+Ye dono confuse mat karna.
+
+CVE
+
+“Kaunsi vulnerability?”
+
+Example:
+
+CVE-2025-XXXXX
+CVSS
+
+“Vulnerability kitni serious hai?”
+
+Conceptually:
+
+CVE
+ ↓
+Vulnerability identify
+ ↓
+CVSS
+ ↓
+Severity/risk understand
+
+CVSS factors mein exploitability aur impact jaise characteristics consider hote hain.
+
+Generally severity categories:
+
+None
+Low
+Medium
+High
+Critical
+
+Security teams often higher-risk vulnerabilities ko priority dete hain.
+
+💥 8. Vulnerability ko naam bhi mil sakta hai
+
+Kabhi-kabhi serious vulnerabilities ko memorable naam mil jata hai.
+
+For example:
+
+Heartbleed
+Log4Shell
+
+Naam yaad rakhna easy hota hai.
+
+Lekin underlying vulnerability ka formal identifier phir bhi CVE ho sakta hai.
+
+So:
+
+Nickname
+   ↓
+Human-friendly
+
+
+CVE
+   ↓
+Official/common identifier
+🧨 9. ExploitDB kya hai?
+
+Text mein ExploitDB ka mention hai.
+
+Isko simple samjho:
+
+ExploitDB ek database hai jahan known vulnerabilities se related exploit/PoC information mil sakti hai.
+
+Suppose tumhare paas:
+
+CVE-XXXX-XXXXX
+
+Ab tum investigate karna chahte ho:
+
+“Kya is vulnerability ka public proof-of-concept available hai?”
+
+Exploit databases useful ho sakte hain.
+
+🧪 10. PoC kya hota hai?
+
+PoC = Proof of Concept
+
+Simple:
+
+Kisi vulnerability ko practically demonstrate karne wala code/example.
+
+Suppose vulnerability theoretically kehti hai:
+
+Software X
+     ↓
+Input validation problem
+     ↓
+Potential security impact
+
+Researcher ek PoC bana sakta hai jo demonstrate kare ki vulnerability actually trigger ho sakti hai.
+
+But bhai, yahan ek important professional habit:
+
+PoC mila ≠ blindly execute karo.
+
+Especially GitHub/ExploitDB se downloaded code.
+
+Pehle:
+
+Read code
+↓
+Understand what it does
+↓
+Check source/reputation
+↓
+Use isolated lab
+↓
+Only authorized target
+📚 11. Official Documentation
+
+Ye section chhota hai but bahut important hai.
+
+Suppose tum Nmap seekh rahe ho.
+
+Internet par tumhe milenge:
+
+YouTube
+Blogs
+Reddit
+Random websites
+AI answers
+Stack Overflow
+Official documentation
+
+Sab useful ho sakte hain.
+
+Lekin tool ka official documentation generally primary reference hona chahiye.
+
+For example:
+
+Nmap
+ ↓
+Official documentation
+ ↓
+Options
+Syntax
+Behaviour
+Examples
+Limitations
+
+Kyun?
+
+Because third-party tutorial:
+
+Old
+↓
+Wrong
+↓
+Incomplete
+
+ho sakta hai.
+
+Official documentation usually latest authoritative information deti hai.
+
+🐧 12. Linux MAN Pages
+
+Ab ye tumhare Linux learning ke liye super important hai.
+
+Terminal mein:
+
+man <command>
+
+Example:
+
+man nc
+
+nc = netcat.
+
+Tumhe command ka manual mil jayega.
+
+🧠 MAN page ko kaise read karna hai?
+
+Example:
+
+NC
+
+Ye command ka naam.
+
+Then:
+
+NAME
+
+Yahan short description.
+
+Example:
+
+nc — arbitrary TCP and UDP connections and listens
+
+Meaning:
+
+nc TCP/UDP connections establish/listen karne ke kaam aa sakta hai.
+
+Phir:
+
+SYNOPSIS
+
+Ye command ka syntax/template hota hai.
+
+Example:
+
+nc [options] [destination] [port]
+
+Isko beginner style mein:
+
+nc
+│
+├── options
+├── destination
+└── port
+
+Samjho.
+
+🔥 13. MAN pages tumhare liye kyun important hain?
+
+Tum Kali/Linux aur cybersecurity seekh rahe ho, toh ye habit bana lo:
+
+Agar command nahi pata:
+
+❌ Random Google command copy-paste mat karo.
+
+Pehle:
+
+man nmap
+
+ya:
+
+man nc
+
+ya:
+
+man ssh
+
+ya:
+
+man grep
+
+Aur quick help ke liye kai commands:
+
+command --help
+
+support karti hain.
+
+🐙 14. GitHub — Cybersecurity ka Treasure Chest
+6
+
+GitHub bhi cybersecurity mein kaafi useful hai.
+
+Researchers wahan publish karte hain:
+
+PoC
+Exploit research
+Security tools
+Scanners
+Scripts
+Technical analysis
+Detection rules
+Writeups
+
+Suppose vulnerability hai:
+
+CVE-2026-1337
+
+GitHub search mein CVE number search karoge:
+
+CVE-2026-1337
+
+To potentially tumhe mil sakta hai:
+
+Research repository
+PoC
+Scanner
+Technical write-up
+Detection script
+⚠️ 15. GitHub ka sabse important warning
+
+Ye line bahut seriously yaad rakhna:
+
+GitHub par code available hai iska matlab safe nahi hai.
+
+Koi repository ka naam:
+
+CVE-XXXX-XXXXX-PoC
+
+rakh dene se wo automatically legitimate nahi ban jaati.
+
+Malicious repository bhi ho sakti hai.
+
+Isliye:
+
+Repository
+    ↓
+Read README
+    ↓
+Check author
+    ↓
+Check repository history
+    ↓
+Read source code
+    ↓
+Understand dependencies
+    ↓
+Use isolated lab
+
+Blindly:
+
+./exploit
+
+mat chala dena. 😄
+
+🗺️ Ab poore chapter ka MASTER MAP
+
+Is room ko aise yaad karo:
+
+                 🔎 SEARCH SKILLS
+                       │
+       ┌───────────────┼────────────────┐
+       │               │                │
+       ▼               ▼                ▼
+    SHODAN         VIRUSTOTAL          CVE
+       │               │                │
+       │               │                ▼
+       │               │           Vulnerability
+       │               │           Identification
+       │               │
+       ▼               ▼
+ Internet-facing     Malware/
+ systems/services    suspicious files
+       │
+       ▼
+ IP / Port /
+ Service / Version
+
+
+
+
+                    CVE
+                     │
+            ┌────────┴────────┐
+            ▼                 ▼
+          CVSS             ExploitDB
+            │                 │
+            ▼                 ▼
+        Severity            PoC/Exploit
+                              │
+                              ▼
+                           GitHub
+                              │
+                              ▼
+                       Research / PoC
+
+Aur side mein:
+
+        TOOL
+          │
+          ▼
+   Official Documentation
+          │
+          ▼
+       man page
+          │
+          ▼
+   Correct usage/syntax
+🧠 Real-world Cybersecurity Investigation Example
+
+Ab maan lo tumhare authorized lab mein server hai:
+
+192.168.1.50
+
+Nmap se tum discover karte ho:
+
+22/tcp   SSH
+80/tcp   HTTP
+443/tcp  HTTPS
+
+Web service identify karne par pata chalta hai:
+
+Apache 2.4.x
+
+Ab tumhara workflow ho sakta hai:
+
+Nmap
+  ↓
+Service identification
+  ↓
+Apache version
+  ↓
+Search vulnerability databases
+  ↓
+Relevant CVEs
+  ↓
+CVSS severity
+  ↓
+Official vendor advisory
+  ↓
+Possible PoC/research
+  ↓
+Validate ONLY in authorized lab
+
+Aur agar suspicious file milti hai:
+
+invoice.exe
+      ↓
+Hash
+      ↓
+VirusTotal
+      ↓
+Vendor detections
+      ↓
+Threat intelligence
+
+Aur agar internet-facing asset research karna hai:
+
+Domain / IP
+      ↓
+Shodan
+      ↓
+Publicly exposed services
+      ↓
+Service/version information
+🎯 Tumhe is chapter se kya yaad rakhna hai?
+Tool/Resource	Simple meaning	Kab use karna
+Shodan	Internet-connected systems/services ka search engine	Exposure/asset research
+VirusTotal	Multiple security engines ka analysis platform	Suspicious files/URLs/domains
+CVE	Vulnerability ka unique ID	Vulnerability identify/reference
+CVSS	Vulnerability severity/risk score	Priority samajhna
+ExploitDB	Public exploit/PoC database	Vulnerability research
+Official Docs	Tool ka authoritative manual	Correct usage
+man	Linux terminal documentation	Commands/options samajhna
+GitHub	Code + research repositories	Tools, PoCs, research
+Ek line mein poora chapter:
+
+“Cybersecurity mein hacker ya defender banne ke liye sirf tools chalana nahi, balki information ko efficiently discover, verify aur interpret karna bhi aana chahiye.”
+
+Aur tumhare current learning path ke hisaab se Shodan + CVE + CVSS + VirusTotal + man pages ko achhe se samajhna bahut useful hai. Ye baad mein Nmap, Wireshark, SOC investigation aur vulnerability assessment sab jagah baar-baar kaam aayega.
